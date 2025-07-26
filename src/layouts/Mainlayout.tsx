@@ -10,6 +10,6 @@ const Mainlayout = () => {
         <Footer/>
     </div>
   )
-}
+};
 
 export default Mainlayout;

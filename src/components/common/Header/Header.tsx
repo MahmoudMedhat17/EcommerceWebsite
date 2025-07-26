@@ -1,4 +1,4 @@
-import {Headercart} from "@/components/eCommerce/HeaderCart";
+import {Headercart} from "@/components/eCommerce";
 import { Link } from "react-router-dom";
 
 const Header = () => {
