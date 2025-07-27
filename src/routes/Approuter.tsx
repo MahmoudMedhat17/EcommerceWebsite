@@ -24,7 +24,7 @@ const router = createBrowserRouter([
                 element:<Categories/>
             },
             {
-                path:"/products/:prefix",
+                path:"/categories/products/:prefix",
                 element:<Products/>,
                 // This errorElement makes this route "products/:id" falls back to the errroElement page when the params doesn't match a string.
                 errorElement:<Errorpage/>,

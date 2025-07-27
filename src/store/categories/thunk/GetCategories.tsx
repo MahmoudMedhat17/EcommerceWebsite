@@ -27,7 +27,7 @@ const getCategories = createAsyncThunk(
             }
             // If it's not coming from axios then we write the error msg
             else{
-                return rejectWithValue("Unexpected error!");
+                return rejectWithValue("Unexpected Error!");
             }
         }
     }
