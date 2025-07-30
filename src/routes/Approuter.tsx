@@ -30,7 +30,7 @@ const router = createBrowserRouter([
                 errorElement:<Errorpage/>,
                 // This loader is for checking if the user enters the params as a string or not so if it's not a string then don't call the API data and show the user the Bad Request "Handling error from the client side to avoid unnecessary API calls".
                 loader:({params})=>{
-                    if(typeof params !== "string" || !/^[A-Za-z]+$/.test(params)){
+                    if(typeof params.prefix !== "string" || !/^[A-Za-z]+$/.test(params.prefix)){
                         throw new Response("Bad Request", {statusText:"Category is not found!",status:400});
                     }
                     return true;
