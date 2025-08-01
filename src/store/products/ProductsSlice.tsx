@@ -21,7 +21,12 @@ const initialState:IProducts={
 const ProductsSlice = createSlice({
     name:"products",
     initialState,
-    reducers:{},
+    reducers:{
+        // Here we clean the array "records" that holds the products when the user gets out of the products page and route to another page.
+        productsCleanUp:(state)=>{
+            state.records = []
+        }
+    },
     extraReducers:(builder)=>{
         builder.addCase(getProducts.pending,(state)=>{
             state.loading = "Idle";
@@ -42,5 +47,5 @@ const ProductsSlice = createSlice({
 
 
 
-
+export const {productsCleanUp} = ProductsSlice.actions;
 export default ProductsSlice.reducer;

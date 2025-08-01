@@ -11,8 +11,11 @@ const Categories = () => {
   const {loading,records,error} = useAppSelector((state)=> state.categories);
 
   useEffect(()=>{
-    dispatch(getCategories());
-  },[dispatch]);
+    // Here this condition is for checking if the array that holds the products is empty or not if it's empty then fire the getCategories action if it's not then stop firing the getCategories action.
+    if(!records.length){
+      dispatch(getCategories());
+    }
+  },[dispatch, records]);
   
   
   return (

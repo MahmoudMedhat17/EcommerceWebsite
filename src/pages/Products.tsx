@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { useParams } from "react-router-dom";
 import getProducts from "@/store/products/thunk/getProducts";
+import { productsCleanUp } from "@/store/products/ProductsSlice";
+
 
 const Products = () => {
   
@@ -11,7 +13,13 @@ const Products = () => {
   const params = useParams();
 
   useEffect(()=>{
-    dispatch(getProducts(params.prefix as string));
+    if(params.prefix){
+      dispatch(getProducts(params.prefix as string));
+    };
+
+    return () =>{
+      dispatch(productsCleanUp());
+    };
     console.log(params)
   },[dispatch,params]);
 
