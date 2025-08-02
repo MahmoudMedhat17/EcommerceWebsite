@@ -1,44 +1,46 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type {TProducts} from "@/types/Products";
+import type { TProducts } from "@/types/Products";
 import getProducts from '@/store/products/thunk/getProducts';
 
 
-interface IProducts{
-    records:TProducts[],
-    loading:'Idle' | 'Pending' | 'Succeeded' | 'Failed';
+interface IProducts {
+    records: TProducts[],
+    loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
     error: string | null;
 };
 
 
-const initialState:IProducts={
-    records:[],
-    loading:"Idle",
-    error:null
+const initialState: IProducts = {
+    records: [],
+    loading: "Idle",
+    error: null
 };
 
 
 
 const ProductsSlice = createSlice({
-    name:"products",
+    name: "products",
     initialState,
-    reducers:{
+    reducers: {
         // Here we clean the array "records" that holds the products when the user gets out of the products page and route to another page.
-        productsCleanUp:(state)=>{
+        productsCleanUp: (state) => {
             state.records = []
         }
     },
-    extraReducers:(builder)=>{
-        builder.addCase(getProducts.pending,(state)=>{
+    extraReducers: (builder) => {
+        builder.addCase(getProducts.pending, (state) => {
             state.loading = "Idle";
+            state.records = [];
             state.error = null;
         });
-        builder.addCase(getProducts.fulfilled, (state,action)=>{
+        builder.addCase(getProducts.fulfilled, (state, action) => {
+            state.loading = "Succeeded";
             state.records = action.payload;
             state.error = null;
         });
-        builder.addCase(getProducts.rejected, (state,action)=>{
+        builder.addCase(getProducts.rejected, (state, action) => {
             state.loading = "Failed";
-            if(action.payload && typeof action.payload === "string"){
+            if (action.payload && typeof action.payload === "string") {
                 state.error = null;
             };
         });
@@ -47,5 +49,5 @@ const ProductsSlice = createSlice({
 
 
 
-export const {productsCleanUp} = ProductsSlice.actions;
+export const { productsCleanUp } = ProductsSlice.actions;
 export default ProductsSlice.reducer;
