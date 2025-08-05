@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { useParams } from "react-router-dom";
 import getProducts from "@/store/products/thunk/getProducts";
-import { productsCleanUp } from "@/store/products/ProductsSlice";
+import { productsCleanUp } from "@/store/products/productsSlice";
 import { LoadingComponent } from "@/components/feedback/index";
 
 const Products = () => {
@@ -16,8 +16,6 @@ const Products = () => {
     if (params.prefix) {
       dispatch(getProducts(params.prefix as string));
     };
-
-    console.log(loading)
 
     return () => {
       dispatch(productsCleanUp());
@@ -35,7 +33,7 @@ const Products = () => {
             // If not empty then show the Products by <Product/> component
             (records.map((product) => (
               <div key={product.id}>
-                <Product title={product.title} price={product.price} img={product.img} />
+                <Product id={product.id} title={product.title} price={product.price} img={product.img} />
               </div>
             )))
             :

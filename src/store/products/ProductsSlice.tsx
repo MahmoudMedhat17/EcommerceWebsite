@@ -18,7 +18,7 @@ const initialState: IProducts = {
 
 
 
-const ProductsSlice = createSlice({
+const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
@@ -49,5 +49,5 @@ const ProductsSlice = createSlice({
 
 
 
-export const { productsCleanUp } = ProductsSlice.actions;
-export default ProductsSlice.reducer;
+export const { productsCleanUp } = productsSlice.actions;
+export default productsSlice.reducer;

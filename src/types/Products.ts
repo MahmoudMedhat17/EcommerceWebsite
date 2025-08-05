@@ -4,5 +4,6 @@ export type TProducts = {
     price:number;
     cat_prefix?:string;
     img:string;
+    quantity?:number;
 };
 
