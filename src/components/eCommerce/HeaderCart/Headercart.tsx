@@ -5,6 +5,8 @@ import { useAppSelector } from "@/store/hooks";
 const Headercart = () => {
 
 
+  // There is a better approach to make this reduce function inside a function to use it multiple times.
+
   // Here we get the value of the items from the store.
   const cartItems = useAppSelector((state) => state.cart.items);
 
