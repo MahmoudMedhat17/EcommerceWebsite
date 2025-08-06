@@ -4,8 +4,8 @@ import { useAppDispatch } from "@/store/hooks";
 
 const Product = ({ id, title, price, img }: TProducts) => {
 
-
   const dispatch = useAppDispatch();
+
   const handleAddToCart = () => {
     dispatch(addToCart(id));
   };
