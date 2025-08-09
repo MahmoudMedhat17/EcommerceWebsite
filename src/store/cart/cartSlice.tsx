@@ -1,5 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 import type { TProducts } from '@/types/Products';
+import type { RootState } from '@/store/index';
 
 
 interface IcartSlice {
@@ -36,8 +37,21 @@ export const cartSlice = createSlice({
     }
 });
 
+// Here we used createSelector to memoize the state of the selector if the data is changed or not if it's changed then fire the function inside the selector if not then don't fire it.
+const getTotalQuantitySelector = createSelector(
+    // The purpose of RootState here to define that state is the same as useAppSelector becuase we don't use useAppSelector here.
+    (state: RootState) => state.cart.items, (items) => {
+        const initialVal = 0;
+        const totalQuantity = Object.values(items).reduce((acc, currentVal) => (
+            acc + currentVal
+        ), initialVal)
+
+        return totalQuantity;
+    }
+);
 
 
 
+export { getTotalQuantitySelector };
 export const { addToCart } = cartSlice.actions;
 export default cartSlice.reducer;

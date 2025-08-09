@@ -1,0 +1,33 @@
+import categoriesSlice from "@/store/categories/categoriesSlice";
+import productsSlice from "@/store/products/productsSlice";
+import  cartSlice  from '@/store/cart/cartSlice';
+import { combineReducers } from "@reduxjs/toolkit";
+import storage from 'redux-persist/lib/storage'; 
+import { persistReducer } from 'redux-persist';
+
+
+// Here is the nomral config
+// const rootPersistConfig = {
+//   key: 'root',
+//   storage,
+//   whitelist:["cart"]
+// };
+
+// Here we target the items to be only cached from the cart and not all the cart "Items & productsInfo array".
+const cartPresistConfig = {
+    key:"cart",
+    // Here we choose Web storage.
+    storage,
+    // Here we choose to cache items only from the cart.
+    whitelist:["items"]
+};
+
+// Here we combine reducers to use them in configureStore.
+const rootReducers = combineReducers({
+    categories: categoriesSlice,
+    products:productsSlice,
+    // Here we apply persistReducer to cart as we want to cache the items inside the cart.
+    cart:persistReducer(cartPresistConfig, cartSlice)
+});
+
+export default rootReducers;
