@@ -1,13 +1,33 @@
 import CartIcon from "@/assets/svg/cart.svg?react";
 import { useAppSelector } from "@/store/hooks";
 import { getTotalQuantitySelector } from "@/store/cart/cartSlice";
+import { useState, useEffect } from "react";
 
 const Headercart = () => {
+
+  const [animate, setAnimate] = useState(false);
 
 
   // There is a better approach to make this reduce function inside a function to use it multiple times.
   // Here we get the value of the items from the store.
   const cartItemsLength = useAppSelector(getTotalQuantitySelector);
+
+
+  useEffect(() => {
+    // Here if the cartItemsLength is 0 then prevent the animation if not then do the code under this condition.
+    if (!cartItemsLength) {
+      return;
+    }
+    // Here we set setAnimate to true when the cartItemsLength cart changes it's value "User added a product".
+    setAnimate(true);  //Start Animation.
+
+    // Here is a time with setTimeOut to trigger the animation to start with 200ms. then set the cart animation back to it's normal state with setAnimate(false).
+    const timer = setTimeout(() => setAnimate(false), 200); //End the Animation.
+
+    // Here we clear the timeOut to avoid memory leaks and avoiding Unecessary UI updates by React.
+    return () => clearTimeout(timer);
+    // Here this useEffect depends on the state change of the cartItemsLength.
+  }, [cartItemsLength]);
 
   // Initialzing the value with 0 to use it inside reduce function.
   // const initialValue = 0;
@@ -16,12 +36,17 @@ const Headercart = () => {
   //   acc + currentVal
   // ), initialValue);
 
+  // Here to handle setAnimate with true or false.
+  const handleCartBtnAnimate = () => {
+    setAnimate((prev) => !prev);
+  };
+
 
   return (
     <div className="relative cursor-pointer">
       <CartIcon />
-      <div className="absolute w-6 h-6 bg-blue-500 rounded-full p-2 text-center text-md -top-3 left-8 flex justify-center items-center">{cartItemsLength}</div>
-    </div>
+      <div onClick={handleCartBtnAnimate} className={`absolute w-6 h-6 bg-blue-500 rounded-full p-2 text-center text-md -top-3 left-8 flex justify-center items-center transition ${animate ? "scale-125 duration-300" : ""}`}>{cartItemsLength}</div>
+    </div >
   )
 }
 
