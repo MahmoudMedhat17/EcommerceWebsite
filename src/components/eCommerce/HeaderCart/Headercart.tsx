@@ -43,9 +43,12 @@ const Headercart = () => {
 
 
   return (
-    <div className="relative cursor-pointer">
-      <CartIcon />
-      <div onClick={handleCartBtnAnimate} className={`absolute w-6 h-6 bg-blue-500 rounded-full p-2 text-center text-md -top-3 left-8 flex justify-center items-center transition ${animate ? "scale-125 duration-300" : ""}`}>{cartItemsLength}</div>
+    <div className="flex items-center">
+      <div className="relative cursor-pointer">
+        <CartIcon />
+        <div onClick={handleCartBtnAnimate} className={`absolute w-5 h-5 bg-blue-500 rounded-full p-2 text-center text-md -top-4 left-4 flex justify-center items-center transition ${animate ? "scale-125 duration-300" : ""}`}>{cartItemsLength}</div>
+      </div>
+      <h5 className="ml-2 font-semibold">Cart</h5>
     </div >
   )
 }

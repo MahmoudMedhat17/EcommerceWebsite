@@ -23,7 +23,7 @@ export const cartSlice = createSlice({
     reducers: {
         addToCart: (state, action) => {
             // Here we get the ID from that we gonna use to fire the action of adding item to the cart.
-            const id = action.payload.id;
+            const id = action.payload;
 
             // Check if the id of the products already exists in the cart "items" if so then increase this product with 1 so this item be included two times inside the cart "The user added to the cart twice and so on".
             if (state.items[id]) {
@@ -39,7 +39,7 @@ export const cartSlice = createSlice({
 
 // Here we used createSelector to memoize the state of the selector if the data is changed or not if it's changed then fire the function inside the selector if not then don't fire it.
 const getTotalQuantitySelector = createSelector(
-    // The purpose of RootState here to define that state is the same as useAppSelector becuase we don't use useAppSelector here.
+    // The purpose of RootState here to define that state is the same as useAppSelector because we don't use useAppSelector here.
     (state: RootState) => state.cart.items, (items) => {
         const initialVal = 0;
         const totalQuantity = Object.values(items).reduce((acc, currentVal) => (

@@ -34,59 +34,67 @@
   "products": [
     {
       "id": 1,
-      "title": "Regular Fit Jersey top",
+      "title": "Jersey top",
       "price": "249.00",
       "cat_prefix": "men",
-      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSWa_-imPyxcGxYkrCAs6v8ftnq90zu1CKKg&s"
+      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSWa_-imPyxcGxYkrCAs6v8ftnq90zu1CKKg&s",
+      "max": 4
     },
     {
       "id": 2,
       "title": "Regular Fit Jersey top",
       "price": "229.00",
       "cat_prefix": "men",
-      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnPZcObuYfd5bJCIrnuI5bFowFQBUxNAtGMA&s"
+      "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnPZcObuYfd5bJCIrnuI5bFowFQBUxNAtGMA&s",
+      "max": 4
     },
     {
       "id": 3,
       "title": "Cotton polo shirt",
       "price": "200.00",
       "cat_prefix": "men",
-      "img": "https://mobaco.com/wp-content/uploads/2024/07/LO100_0020_1.jpg"
+      "img":"https://mobaco.com/wp-content/uploads/2024/07/LO100_0020_1.jpg",
+      "max": 3
     },
     {
       "id": 4,
       "title": "Cotton t-shirt",
       "price": "100.00",
       "cat_prefix": "women",
-      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IgzZSKzDqQ7rmoPr3SMkYeNQpZGFpsFSYw&s"
+      "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1IgzZSKzDqQ7rmoPr3SMkYeNQpZGFpsFSYw&s",
+      "max": 2
     },
     {
       "id": 5,
       "title": "Sweatshirt shorts",
       "price": "300.00",
       "cat_prefix": "women",
-      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwvfFGXlhs_3eArIV9KSE5KfWloTCN8Ycihw&s"
+      "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwvfFGXlhs_3eArIV9KSE5KfWloTCN8Ycihw&s",
+      "max": 3
     },
     {
       "id": 6,
       "title": "Velour top",
       "price": "300.00",
       "cat_prefix": "kids",
-      "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5fqn9hGmbDQ9wEpgTOCSakn5h8Nrr1eXhA&s"
+      "img":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5fqn9hGmbDQ9wEpgTOCSakn5h8Nrr1eXhA&s",
+      "max": 2
     },
     {
       "id": 9,
       "title": "Pile all-in-one suit with ears",
       "price": "500.00",
       "cat_prefix": "baby",
-      "img": "https://dynamic.zacdn.com/P13CI0grF4thMPYEjMieQFC1ZBA=/filters:quality(70):format(webp)/https://static-sg.zacdn.com/p/hm-8139-5413423-1.jpg"
+      "img":"https://dynamic.zacdn.com/P13CI0grF4thMPYEjMieQFC1ZBA=/filters:quality(70):format(webp)/https://static-sg.zacdn.com/p/hm-8139-5413423-1.jpg",
+      "max": 2
     },
     {
       "id": 17,
       "title": "Regular Fit football shirt",
       "price": "449.00",
       "cat_prefix": "sport",
-      "img": "https://www.discountfootballkits.com/productimage.php?proCatImg=hr46112xl.jpg"
+      "img":"https://www.discountfootballkits.com/productimage.php?proCatImg=hr46112xl.jpg",
+      "max": 2
     }
   ]
 }
