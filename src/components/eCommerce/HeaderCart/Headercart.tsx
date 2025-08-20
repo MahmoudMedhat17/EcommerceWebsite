@@ -2,11 +2,13 @@ import CartIcon from "@/assets/svg/cart.svg?react";
 import { useAppSelector } from "@/store/hooks";
 import { getTotalQuantitySelector } from "@/store/cart/cartSlice";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Headercart = () => {
 
   const [animate, setAnimate] = useState(false);
-
+  // Here we use useNavigate to route instead of using Link to avoid the user to click on a button.
+  const navigate = useNavigate();
 
   // There is a better approach to make this reduce function inside a function to use it multiple times.
   // Here we get the value of the items from the store.
@@ -43,7 +45,7 @@ const Headercart = () => {
 
 
   return (
-    <div className="flex items-center">
+    <div onClick={() => navigate("/cart")} className="flex items-center">
       <div className="relative cursor-pointer">
         <CartIcon />
         <div onClick={handleCartBtnAnimate} className={`absolute w-5 h-5 bg-blue-500 rounded-full p-2 text-center text-md -top-4 left-4 flex justify-center items-center transition ${animate ? "scale-125 duration-300" : ""}`}>{cartItemsLength}</div>

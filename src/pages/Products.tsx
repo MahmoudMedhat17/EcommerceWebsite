@@ -13,7 +13,6 @@ const Products = () => {
   const cartItemsLength = useAppSelector((state) => state.cart.items);
   const dispatch = useAppDispatch();
   const params = useParams();
-  console.log(params.prefix)
 
 
 

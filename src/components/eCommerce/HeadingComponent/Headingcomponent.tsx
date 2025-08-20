@@ -1,3 +1,4 @@
+// A component to use multiple times instead of writing the same component in different pages.
 
 
 const Headingcomponent = ({ children }: { children: React.ReactNode }) => {
