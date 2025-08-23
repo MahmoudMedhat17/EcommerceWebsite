@@ -1,7 +1,7 @@
 import { Category } from "@/components/eCommerce";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import getCategories from "@/store/categories/thunk/GetCategories";
+import getCategories from "@/store/categories/thunk/getCategories";
 import { LoadingComponent } from "@/components/feedback";
 
 const Categories = () => {

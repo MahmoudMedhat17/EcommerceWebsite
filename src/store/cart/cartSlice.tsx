@@ -1,19 +1,24 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
 import type { TProducts } from '@/types/Products';
 import type { RootState } from '@/store/index';
-
+import getCartItems from './thunk/getCartItems';
 
 interface IcartSlice {
     // Here we make sure with index signature that items object recieves an id as a number only.
     items: { [key: string]: number };
     // Here productDetails includes all the props coming from TProducts.
     productDetails: TProducts[];
+    loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
+    error: string | null;
 };
+
 
 
 const initialState: IcartSlice = {
     items: {},
-    productDetails: []
+    productDetails: [],
+    loading: "Idle",
+    error: null
 };
 
 
@@ -34,6 +39,24 @@ export const cartSlice = createSlice({
                 state.items[id] = 1;
             }
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getCartItems.pending, (state) => {
+            state.loading = "Pending";
+            state.error = null;
+        });
+        builder.addCase(getCartItems.fulfilled, (state, action) => {
+            state.loading = "Succeeded";
+            // Here intialize the productDetails array with the array coming from the API.
+            state.productDetails = action.payload;
+        });
+        builder.addCase(getCartItems.rejected, (state, action) => {
+            state.loading = "Failed";
+            if (action.payload && typeof action.payload === "string") {
+                // Here intialize the error with the error coming from the API.
+                state.error = action.payload;
+            }
+        })
     }
 });
 

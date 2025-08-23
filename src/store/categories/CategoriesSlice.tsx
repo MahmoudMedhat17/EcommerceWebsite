@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import getCategories from './thunk/GetCategories';
+import getCategories from '@/store/categories/thunk/GetCategories';
 import type { TCategories } from "@/types/Categories";
 
 // Here we define the data for records array is the data we get from the API, The Loading states with "Literal Types" and The error state with a string or null.
