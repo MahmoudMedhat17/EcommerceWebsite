@@ -19,7 +19,7 @@ const Headercart = () => {
     // Here if the cartItemsLength is 0 then prevent the animation if not then do the code under this condition.
     if (!cartItemsLength) {
       return;
-    }
+    };
     // Here we set setAnimate to true when the cartItemsLength cart changes it's value "User added a product".
     setAnimate(true);  //Start Animation.
 

@@ -1,10 +1,10 @@
 export type TProducts = {
-    id?:number;
+    id:number;
     title?:string;
     price?:number;
     cat_prefix?:string;
     img?:string;
-    quantity?:number;
-    max:number;
+    quantity:number;
+    max?:number;
 };
 

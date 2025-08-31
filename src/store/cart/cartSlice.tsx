@@ -22,6 +22,7 @@ const initialState: IcartSlice = {
 };
 
 
+
 export const cartSlice = createSlice({
     name: "cart",
     initialState,
@@ -38,6 +39,17 @@ export const cartSlice = createSlice({
             else {
                 state.items[id] = 1;
             }
+        },
+        // This reducer is for changing the quantity state that is used to dispatch it inside the cart page.
+        changeQuantityState: (state, action) => {
+            // Here we set the state of the item we want to change the quantity using it's ID and provide the ID with the new quantity amount.
+            state.items[action.payload.id] = action.payload.quantity;
+        },
+        // This action is to remove an item from the cart.
+        removeItems:(state,action)=>{
+            const targetItem = action.payload.id;
+            // Need to fix caching problem from Redux Presist when refreshing the page the items removed comes back from localStorage.
+            state.productDetails =  state.productDetails.filter((item)=> item.id !== targetItem);
         }
     },
     extraReducers: (builder) => {
@@ -76,5 +88,5 @@ const getTotalQuantitySelector = createSelector(
 
 
 export { getTotalQuantitySelector };
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, changeQuantityState, removeItems } = cartSlice.actions;
 export default cartSlice.reducer;

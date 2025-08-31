@@ -15,5 +15,13 @@ export default defineConfig({
     alias:{
       "@":path.resolve(__dirname,"src")
     }
+  },
+  server:{
+    proxy:{
+      "/products":{
+        target: "http://localhost:5000", // Here making sure to hit the backend endpoint of products and not the React dev server.
+        changeOrigin: true,
+      }
+    }
   }
 });

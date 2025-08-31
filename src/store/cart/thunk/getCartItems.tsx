@@ -26,9 +26,26 @@ const getCartItems = createAsyncThunk(
         // Here with Try & Catch we call the API data using axios and handle the errors.
         try {
             // Get the data of /products with the modified ids we created above => productIds.
-            const res = await axios.get(`/products/${productIds}`);
-            // return the data.
-            return res.data;
+            const res = await axios.get(`/products?${productIds}`);
+
+            // Here we assign data variable with data coming from th 
+            let data = res.data;
+
+            if (typeof data === "string") {
+                try {
+                    data = JSON.parse(data);
+                } catch {
+                    return data = [];
+                }
+            };
+
+
+            // Here a check if data is not an array then return it as an array.
+            if (!Array.isArray(data)) {
+                return data = [];
+            };
+
+            return data;
         } catch (error) {
             // Here we handle error if it's coming from API data and return the error with rejectWithValue coming from thunkAPI.
             if (axios.isAxiosError(error)) {
