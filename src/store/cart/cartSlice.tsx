@@ -47,8 +47,11 @@ export const cartSlice = createSlice({
         },
         // This action is to remove an item from the cart.
         removeItems:(state,action)=>{
+            // Here we target the id of the product and set into a variable instead of writing everytime action.payload.id.
             const targetItem = action.payload.id;
-            // Need to fix caching problem from Redux Presist when refreshing the page the items removed comes back from localStorage.
+            // delete is a JS operator that removes the property from the Object. so Here we want to remove the item from the cart by it's ID "targetItem".
+            delete state.items[targetItem];
+            // Here we use filter method around productDetails array to remove the matched id of the chosen product to be deletd from the array.
             state.productDetails =  state.productDetails.filter((item)=> item.id !== targetItem);
         }
     },

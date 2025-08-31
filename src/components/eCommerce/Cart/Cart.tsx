@@ -5,7 +5,8 @@ import CartList from "@/components/eCommerce/Cart/CartList";
 import getCartItems from "@/store/cart/thunk/getCartItems";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useCallback } from "react";
-import { changeQuantityState } from "@/store/cart/cartSlice";
+import { changeQuantityState, removeItems } from "@/store/cart/cartSlice";
+
 
 
 
@@ -37,6 +38,13 @@ const Cart = () => {
     },[dispatch]);
 
 
+    // Here we handle the deleteItems from the cart as the changeQuantity function to handle the cache of the items that is not changed.
+    //This function is passed through to Cartitem as a props.
+    const deleteItems =useCallback((id:number)=>{
+        // removeItems coming from the cartSlice that takes the id of the item that should be removed.
+        dispatch(removeItems({id}));
+    },[dispatch]);
+
     return (
         <>
             <Headingcomponent>
@@ -52,7 +60,7 @@ const Cart = () => {
                     (
                         <LoadingComponent status={loading} error={error}>
                             {/* Here we create a component that holds all the cartItems and pass the products we get from the cartSlice to it so we can use the props of this slice inside this component. */}
-                            <CartList products={products} changeQuantity={changeQuantity} />
+                            <CartList products={products} changeQuantity={changeQuantity} deleteItems={deleteItems}/>
                             {/* This a component for subTotal amount */}
                             <Subtotal />
                         </LoadingComponent>
