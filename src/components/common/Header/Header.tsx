@@ -1,14 +1,17 @@
-import {Headercart} from "@/components/eCommerce";
+import {Headercart, Wishlist} from "@/components/eCommerce";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header>
+    <header className="pt-2">
       <div className="flex justify-between items-center">
         <Link to={"/"}>
           <span className="font-semibold text-xl">E-commerce</span>
         </Link>
+        <div className="flex items-center gap-4">
+        <Wishlist/>
         <Headercart/>
+        </div>
       </div>
       <header className="bg-gray-900 mt-8">
         <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">

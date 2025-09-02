@@ -28,7 +28,7 @@ const getCartItems = createAsyncThunk(
             // Get the data of /products with the modified ids we created above => productIds.
             const res = await axios.get(`/products?${productIds}`);
 
-            // Here we assign data variable with data coming from th 
+            // Here we assign data variable with data coming from the API. 
             let data = res.data;
 
             if (typeof data === "string") {

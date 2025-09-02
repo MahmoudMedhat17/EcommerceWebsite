@@ -48,7 +48,12 @@ const Headercart = () => {
     <div onClick={() => navigate("/cart")} className="flex items-center cursor-pointer">
       <div className="relative">
         <CartIcon />
-        <div onClick={handleCartBtnAnimate} className={`absolute w-5 h-5 bg-blue-500 rounded-full p-2 text-center text-md -top-4 left-4 flex justify-center items-center transition ${animate ? "scale-125 duration-300" : ""}`}>{cartItemsLength}</div>
+        {
+          // Here we check if the cart has no items then don't show the circle icon with the number of items inside the cart.
+          cartItemsLength > 0 && (
+            <div onClick={handleCartBtnAnimate} className={`absolute w-5 h-5 bg-blue-500 rounded-full p-2 text-center text-md -top-4 left-4 flex justify-center items-center transition ${animate ? "scale-125 duration-300" : ""}`}>{cartItemsLength}</div>
+          )
+        }
       </div>
       <h5 className="ml-2 font-semibold">Cart</h5>
     </div >

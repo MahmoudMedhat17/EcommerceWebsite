@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import type { TProducts } from "@/types/Products";
+import LikeFillIcon from "@/assets/svg/like.svg?react";
 
 // Here is a type for TProducts and intersection with function changeQuantity coming as props from the Cart.
 type cartItemsProps = TProducts & {
@@ -46,7 +47,10 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
     return (
         <div className="flex justify-between border-b-2 border-gray-300 my-4">
             <div className="flex gap-4 mb-4">
-                <img src={img} className="w-32 h-36" />
+                <div className='relative w-44 sm:w-52'>
+                <img src={img} className="w-32 h-36 mx-auto" />
+                <LikeFillIcon className='absolute top-1 right-0.5 sm:right-1 cursor-pointer'/>
+                </div>
                 <div className="flex flex-col justify-between">
                     <div>
                         <h3 className="font-semibold">{title}</h3>
