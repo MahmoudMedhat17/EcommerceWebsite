@@ -53,6 +53,10 @@ export const cartSlice = createSlice({
             delete state.items[targetItem];
             // Here we use filter method around productDetails array to remove the matched id of the chosen product to be deletd from the array.
             state.productDetails =  state.productDetails.filter((item)=> item.id !== targetItem);
+        },
+        // Here we set the productDetails array to an empty array again so when user clicks on Clear Cart button all the products are removed from the array and the array becomes empty and so is the Cart.
+        clearCart:(state)=>{
+            state.productDetails = [];
         }
     },
     extraReducers: (builder) => {
@@ -91,5 +95,5 @@ const getTotalQuantitySelector = createSelector(
 
 
 export { getTotalQuantitySelector };
-export const { addToCart, changeQuantityState, removeItems } = cartSlice.actions;
+export const { addToCart, changeQuantityState, removeItems, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
