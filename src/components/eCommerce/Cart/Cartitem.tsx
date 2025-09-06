@@ -12,6 +12,8 @@ type cartItemsProps = TProducts & {
 const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, deleteItems }: cartItemsProps) => {
 
 
+
+
     //Here I make max of the items in the cart coming from the store as an array and fill this array with dummy data (0) and then map around this array 
     //to get the quantity from max => 4 to 1 with the index of each number in the array 
     //then return this index to <option/> so it can be used in <select></select> to display the number of quantity of each item in a dropdown menu.
@@ -41,7 +43,8 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
     const handleDeleteItems = ()=>{
         deleteItems(id);
     };
-    
+
+  
 
 
     return (

@@ -10,8 +10,6 @@ const Wishlist = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
-
-
     setAnimate(true);
 
     const timer = setTimeout(()=>setAnimate(false),200);
@@ -21,8 +19,6 @@ const Wishlist = () => {
   },[totalQuantity]);
 
 
-  // IMPORTANT.
-  // Need to check the cart can't calculate all of the items price even when these items are already inside the cart.
 
   return (
     <div onClick={()=>navigate("/wishlist")} className="flex items-center gap-2 cursor-pointer px-5 border-r-2">

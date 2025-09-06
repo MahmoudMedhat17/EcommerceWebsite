@@ -21,11 +21,15 @@ const Cart = () => {
 
 
     // Here i want to get the productDetails from the cartSlice but with the quantity so i get all the props inside the productDetails and with quantity of each item inside the cart.
-    const products = productDetails.map((product) => (
+
+    // Here i want to filter the productDetails to only get the products that the user has added to the cart only to prevent rendering the Products that the user didn't add in the cart.
+    // By getting the product id in the items.
+    const productsInCart = productDetails.filter((product)=> items[product.id]);
+
+    // Here i loop over the filtered array with the products added to the cart only and not all the products, with this approach we make sure that there's no product is rendered inside the cart the user didn't add.
+    const products = productsInCart.map((product)=>(
         {
-            // Here we get all the props from the productDetails.
             ...product,
-            // Here we want to get the quantity of each item by using items coming from the cartSlice with each product id.
             quantity: items[product.id || 0]
         }
     ));
@@ -50,6 +54,7 @@ const Cart = () => {
     const handleClearCart = () =>{
         dispatch(clearCart());
     };
+
 
     return (
         <>
