@@ -1,10 +1,10 @@
 import categoriesSlice from "@/store/categories/categoriesSlice";
 import productsSlice from "@/store/products/productsSlice";
-import  cartSlice  from '@/store/cart/cartSlice';
-import wishlistSlice from "@/store/wishlist/wishlistSlice";
+import cartSlice from '@/store/cart/cartSlice';
+import wishlistSlice from "@/store/wishlist/wishlist";
 import { combineReducers } from "@reduxjs/toolkit";
-import storage from 'redux-persist/lib/storage'; 
 import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; 
 
 
 // Here is the nomral config
@@ -29,7 +29,7 @@ const rootReducers = combineReducers({
     products:productsSlice,
     // Here we apply persistReducer to cart as we want to cache the items inside the cart.
     cart:persistReducer(cartPresistConfig, cartSlice),
-    wishlist:wishlistSlice
+    wishlist: wishlistSlice
 });
 
 export default rootReducers;

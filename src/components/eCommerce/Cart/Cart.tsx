@@ -14,6 +14,7 @@ const Cart = () => {
 
     const dispatch = useAppDispatch();
     const { items, loading, error, productDetails } = useAppSelector((state) => state.cart);
+    const wishlistItems = useAppSelector((state)=> state.wishlist.itemsId);
 
     useEffect(() => {
         dispatch(getCartItems());
@@ -30,7 +31,8 @@ const Cart = () => {
     const products = productsInCart.map((product)=>(
         {
             ...product,
-            quantity: items[product.id || 0]
+            quantity: items[product.id || 0],
+            liked: wishlistItems.includes(product.id)
         }
     ));
 

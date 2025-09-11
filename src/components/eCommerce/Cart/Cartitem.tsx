@@ -1,6 +1,10 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import type { TProducts } from "@/types/Products";
 import LikeFillIcon from "@/assets/svg/like.svg?react";
+import Like from "@/assets/svg/like.svg?react";
+import getToggleLike from '@/store/wishlist/thunk/getToggleLike';
+import { useAppDispatch } from '@/store/hooks';
+
 
 // Here is a type for TProducts and intersection with function changeQuantity coming as props from the Cart.
 type cartItemsProps = TProducts & {
@@ -9,9 +13,9 @@ type cartItemsProps = TProducts & {
 };
 
 // Wrapped the component with memo to cache the props coming from the parent if it's not changed to aboid unnecessary renders.
-const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, deleteItems }: cartItemsProps) => {
+const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, deleteItems, liked }: cartItemsProps) => {
 
-
+const dispatch = useAppDispatch();
 
 
     //Here I make max of the items in the cart coming from the store as an array and fill this array with dummy data (0) and then map around this array 
@@ -44,15 +48,30 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
         deleteItems(id);
     };
 
-  
+
+    const handleToggleLike = (e:React.MouseEvent<HTMLButtonElement>) =>{
+        e.preventDefault();
+        e.stopPropagation();
+        dispatch(getToggleLike(id));
+    };
 
 
     return (
         <div className="flex justify-between border-b-2 border-gray-300 my-4">
             <div className="flex gap-4 mb-4">
                 <div className='relative w-44 sm:w-52'>
-                <img src={img} className="w-32 h-36 mx-auto" />
-                <LikeFillIcon className='absolute top-1 right-0.5 sm:right-1 cursor-pointer'/>
+                    <img src={img} className="w-32 h-36 mx-auto" />
+                    <button type='button' onClick={handleToggleLike} className='absolute top-1 right-0.5 sm:right-1'>
+                        {
+                            liked ?
+                            (
+                                <Like/>
+                            )
+                            :
+                            <LikeFillIcon className='cursor-pointer'/>
+                        }
+                    </button>
+                    {/* <LikeFillIcon  className='absolute top-1 right-0.5 sm:right-1 cursor-pointer'/> */}
                 </div>
                 <div className="flex flex-col justify-between">
                     <div>
