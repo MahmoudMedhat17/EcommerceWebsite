@@ -6,6 +6,7 @@ import Login from "@/pages/Login";
 import Products from "@/pages/Products";
 import Register from "@/pages/Register";
 import Errorpage from "@/pages/Errorpage";
+import Wishlist from "@/pages/Wishlist";
 import { Cart } from "@/components/eCommerce";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: "/cart",
                 element: <Cart />
+            },
+            {
+                path:"/wishlist",
+                element:<Wishlist/>
             },
             {
                 path: "/categories/products/:prefix",

@@ -16,7 +16,7 @@ const CartList = ({ products, changeQuantity, deleteItems }: cartItemsProps) => 
         <>
             {
                 products.map((product) => (
-                    <Cartitem key={product.id} id={product.id} title={product.title} price={product.price} img={product.img} quantity={product.quantity} max={product.max} changeQuantity={changeQuantity} deleteItems={deleteItems}/>
+                    <Cartitem key={product.id} id={product.id} title={product.title} price={product.price} img={product.img} quantity={product.quantity} max={product.max} liked={product.liked} changeQuantity={changeQuantity} deleteItems={deleteItems}/>
                 ))
             }
         </>

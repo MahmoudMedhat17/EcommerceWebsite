@@ -99,8 +99,14 @@
   ],
   "wishlist": [
     {
-      "id": "1",
-      "userId": 1
+      "id": "22e9",
+      "userId": 1,
+      "productId": "6"
+    },
+    {
+      "id": "767c",
+      "userId": 1,
+      "productId": "1"
     }
   ]
 }

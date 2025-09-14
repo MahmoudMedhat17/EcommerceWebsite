@@ -1,9 +1,10 @@
-import React, { memo } from 'react';
+import { memo, useState } from 'react';
 import type { TProducts } from "@/types/Products";
 import LikeFillIcon from "@/assets/svg/like.svg?react";
 import Like from "@/assets/svg/like.svg?react";
-import getToggleLike from '@/store/wishlist/thunk/getToggleLike';
 import { useAppDispatch } from '@/store/hooks';
+import getToggleLike from '@/store/wishlist/thunk/getToggleLike';
+import { SpinnerCircularFixed } from 'spinners-react';
 
 
 // Here is a type for TProducts and intersection with function changeQuantity coming as props from the Cart.
@@ -15,7 +16,8 @@ type cartItemsProps = TProducts & {
 // Wrapped the component with memo to cache the props coming from the parent if it's not changed to aboid unnecessary renders.
 const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, deleteItems, liked }: cartItemsProps) => {
 
-const dispatch = useAppDispatch();
+    const [loading,setLoading] = useState(false);
+    const dispatch = useAppDispatch();
 
 
     //Here I make max of the items in the cart coming from the store as an array and fill this array with dummy data (0) and then map around this array 
@@ -49,9 +51,11 @@ const dispatch = useAppDispatch();
     };
 
 
-    const handleToggleLike = (e:React.MouseEvent<HTMLButtonElement>) =>{
-        e.preventDefault();
-        e.stopPropagation();
+    const handleToggleLike = () =>{
+        if(loading){
+            return;
+        };
+        setLoading(true);
         dispatch(getToggleLike(id));
     };
 
@@ -63,15 +67,21 @@ const dispatch = useAppDispatch();
                     <img src={img} className="w-32 h-36 mx-auto" />
                     <button type='button' onClick={handleToggleLike} className='absolute top-1 right-0.5 sm:right-1'>
                         {
-                            liked ?
+                            loading ?
                             (
-                                <Like/>
+                                <SpinnerCircularFixed size={20} thickness={100} speed={100} color="#2B7FFF" />
                             )
                             :
-                            <LikeFillIcon className='cursor-pointer'/>
+                            liked ? 
+                            (
+                                <LikeFillIcon className='cursor-pointer'/>
+                            )
+                            :
+                            (
+                                <Like className='cursor-pointer'/>
+                            )
                         }
                     </button>
-                    {/* <LikeFillIcon  className='absolute top-1 right-0.5 sm:right-1 cursor-pointer'/> */}
                 </div>
                 <div className="flex flex-col justify-between">
                     <div>

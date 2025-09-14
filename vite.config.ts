@@ -21,16 +21,20 @@ export default defineConfig({
       "/products":{
         target: "http://localhost:5000", // Here making sure to hit the backend endpoint of products and not the React dev server.
         changeOrigin: true,
+        secure:false, 
+        rewrite: (path) => path.replace(/^\/products/, "/products"),
       },
       "/categories":{
         target:"http://localhost:5000",
         changeOrigin: true,
-
+        secure:false,
+        rewrite: (path) => path.replace(/^\/categories/, "/categories"),
       },
       "/wishlist":{
         target:"http://localhost:5000",
         changeOrigin: true,
-
+        secure:false,
+        rewrite: (path) => path.replace(/^\/wishlist/, "/wishlist"),
       }
     }
   }

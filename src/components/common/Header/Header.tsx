@@ -18,16 +18,16 @@ const Header = () => {
           <div className="flex flex-1 items-center justify-end md:justify-between">
             <nav aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
-                <Link to={"/"}>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="#"> Home </a>
+                <Link to={"/"} className="text-gray-500 transition hover:text-gray-500/75">
+                  Home 
                 </Link>
 
-                <Link to={"/categories"}>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="#"> Categories </a>
+                <Link to={"/categories"} className="text-gray-500 transition hover:text-gray-500/75">
+                  Categories 
                 </Link>
 
-                <Link to={"/aboutus"}>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="#"> About </a>
+                <Link to={"/aboutus"} className="text-gray-500 transition hover:text-gray-500/75">
+                  About
                 </Link>
               </ul>
             </nav>
