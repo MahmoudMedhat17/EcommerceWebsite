@@ -1,10 +1,10 @@
 import { memo, useState } from 'react';
 import type { TProducts } from "@/types/Products";
-import LikeFillIcon from "@/assets/svg/like.svg?react";
-import Like from "@/assets/svg/like.svg?react";
 import { useAppDispatch } from '@/store/hooks';
 import getToggleLike from '@/store/wishlist/thunk/getToggleLike';
-import { SpinnerCircularFixed } from 'spinners-react';
+import { SpinnerCircular } from 'spinners-react';
+import { FcLike } from "react-icons/fc";
+import { FcLikePlaceholder } from "react-icons/fc";
 
 
 // Here is a type for TProducts and intersection with function changeQuantity coming as props from the Cart.
@@ -15,10 +15,8 @@ type cartItemsProps = TProducts & {
 
 // Wrapped the component with memo to cache the props coming from the parent if it's not changed to aboid unnecessary renders.
 const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, deleteItems, liked }: cartItemsProps) => {
-
-    const [loading,setLoading] = useState(false);
+    const[isLoading ,setIsLoading] = useState(false);
     const dispatch = useAppDispatch();
-
 
     //Here I make max of the items in the cart coming from the store as an array and fill this array with dummy data (0) and then map around this array 
     //to get the quantity from max => 4 to 1 with the index of each number in the array 
@@ -32,7 +30,6 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
             </option>
         )
     });
-
 
 
     // This function that is used to onChange the <select></select> by the function passed as props from the Cart.
@@ -50,13 +47,16 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
         deleteItems(id);
     };
 
-
-    const handleToggleLike = () =>{
-        if(loading){
+    // Handle like toggle button by changing between liked and unlike icons and isLoading state here used to load the spinner icon between the duration of liking and unliking the item.
+    const handleLikeToggle = (e:React.MouseEvent<HTMLButtonElement>) =>{
+        if(isLoading){
             return;
         };
-        setLoading(true);
-        dispatch(getToggleLike(id));
+        e.preventDefault();
+        e.stopPropagation();
+        setIsLoading(true);
+        dispatch(getToggleLike(id))
+        console.log(id,"Working");
     };
 
 
@@ -65,20 +65,20 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
             <div className="flex gap-4 mb-4">
                 <div className='relative w-44 sm:w-52'>
                     <img src={img} className="w-32 h-36 mx-auto" />
-                    <button type='button' onClick={handleToggleLike} className='absolute top-1 right-0.5 sm:right-1'>
+                    <button className='absolute top-1 right-0.5 sm:right-1' type='button' onClick={handleLikeToggle}>
                         {
-                            loading ?
+                            isLoading ? 
                             (
-                                <SpinnerCircularFixed size={20} thickness={100} speed={100} color="#2B7FFF" />
+                                <SpinnerCircular size={20} thickness={100} speed={100} color="#2B7FFF"/>
                             )
                             :
                             liked ? 
                             (
-                                <LikeFillIcon className='cursor-pointer'/>
+                                <FcLike className="cursor-pointer"/>
                             )
                             :
                             (
-                                <Like className='cursor-pointer'/>
+                                <FcLikePlaceholder className="cursor-pointer"/>
                             )
                         }
                     </button>
@@ -88,7 +88,7 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
                         <h3 className="font-semibold">{title}</h3>
                         <p>{price} EGP</p>
                     </div>
-                    <button onClick={handleDeleteItems} className="bg-gray-500 text-white px-4 md:px-8 py-2 hover:bg-red-600 duration-300 cursor-pointer rounded-md w-fit">Remove</button>
+                    <button type='button' onClick={handleDeleteItems} className="bg-gray-500 text-white px-4 md:px-8 py-2 hover:bg-red-600 duration-300 cursor-pointer rounded-md w-fit">Remove</button>
                 </div>
             </div>
             <div className="flex flex-col gap-2">

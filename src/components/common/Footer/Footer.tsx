@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 
 const Footer = () => {
 
@@ -39,15 +41,15 @@ const Footer = () => {
 
         <ul className="mt-8 flex flex-wrap justify-start gap-4 text-xs sm:mt-0 lg:justify-end">
           <li>
-            <a href="#" className="text-gray-500 transition hover:opacity-75"> Terms & Conditions </a>
+            <Link to={"#"} className="text-gray-500 transition hover:opacity-75"> Terms & Conditions </Link>
           </li>
 
           <li>
-            <a href="#" className="text-gray-500 transition hover:opacity-75"> Privacy Policy </a>
+            <Link to={"#"} className="text-gray-500 transition hover:opacity-75"> Privacy Policy </Link>
           </li>
 
           <li>
-            <a href="#" className="text-gray-500 transition hover:opacity-75"> Cookies </a>
+            <Link to={"#"} className="text-gray-500 transition hover:opacity-75"> Cookies </Link>
           </li>
         </ul>
       </div>

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import getCategories from "@/store/categories/thunk/getCategories";
 import { LoadingComponent } from "@/components/feedback";
+import { cleanCategorySlice } from "@/store/categories/categoriesSlice";
 
 const Categories = () => {
 
@@ -14,8 +15,11 @@ const Categories = () => {
     // Here this condition is for checking if the array that holds the products is empty or not if it's empty then fire the getCategories action if it's not then stop firing the getCategories action.
     if (!records.length) {
       dispatch(getCategories());
+      return ()=>{
+        dispatch(cleanCategorySlice());
+      };
     }
-  }, [dispatch, records]);
+  }, [dispatch]);
 
 
   return (

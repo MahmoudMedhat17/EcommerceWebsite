@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Product } from "@/components/eCommerce";
 import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import getProducts from "@/store/products/thunk/getProducts";
-import { productsCleanUp } from "@/store/products/productsSlice";
+import { cleanProductsSlice } from "@/store/products/productsSlice";
 import { LoadingComponent } from "@/components/feedback/index";
 import Headingcomponent from "@/components/eCommerce/HeadingComponent/Headingcomponent";
 
@@ -32,17 +32,15 @@ const Products = () => {
     };
 
     return () => {
-      dispatch(productsCleanUp());
+      dispatch(cleanProductsSlice());
     };
   }, [dispatch, params]);
 
   return (
     <>
       {/* This is a component header that is an h2 tag that renders children */}
-      <Headingcomponent>
+      <Headingcomponent title={`${(params.prefix)?.replace(/^./, char => char.toUpperCase())} products`}/>
         {/* Here are the children rendered as params.prefix => (men, women, kids, baby, sports) products coming from the API data. */}
-        {params.prefix} products
-      </Headingcomponent>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-10">
 
         {/* Here LoadingComponent is here to display the loading state or error state when calling the data. "Better for UserExperience"*/}

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import getCategories from '@/store/categories/thunk/GetCategories';
+import getCategories from '@/store/categories/thunk/getCategories';
 import type { TCategories } from "@/types/Categories";
 
 // Here we define the data for records array is the data we get from the API, The Loading states with "Literal Types" and The error state with a string or null.
@@ -19,7 +19,11 @@ const initialState: ICategories = {
 const categoriesSlice = createSlice({
     name: "categories",
     initialState,
-    reducers: {},
+    reducers: {
+        cleanCategorySlice:(state)=>{
+            state.records = []
+        }
+    },
     // ExtraReducers for API fetching data.
     extraReducers: (builder) => {
         builder.addCase(getCategories.pending, (state) => {
@@ -44,5 +48,5 @@ const categoriesSlice = createSlice({
     }
 });
 
-
+export const {cleanCategorySlice} = categoriesSlice.actions
 export default categoriesSlice.reducer;

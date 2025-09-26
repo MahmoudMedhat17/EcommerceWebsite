@@ -1,11 +1,11 @@
 import Headingcomponent from "@/components/eCommerce/HeadingComponent/Headingcomponent";
-import Subtotal from "@/components/eCommerce/Cart/Subtotal";
 import { LoadingComponent } from "@/components/feedback";
+import Subtotal from "@/components/eCommerce/Cart/Subtotal";
 import CartList from "@/components/eCommerce/Cart/CartList";
 import getCartItems from "@/store/cart/thunk/getCartItems";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useCallback } from "react";
-import { changeQuantityState, removeItems, clearCart } from "@/store/cart/cartSlice";
+import { changeQuantityState, removeItems, clearCart, cleanCartSlice } from "@/store/cart/cartSlice";
 
 
 
@@ -14,10 +14,14 @@ const Cart = () => {
 
     const dispatch = useAppDispatch();
     const { items, loading, error, productDetails } = useAppSelector((state) => state.cart);
-    const wishlisteItems = useAppSelector((state)=> state.wishlist.itemsId);
+    const wishlistItems = useAppSelector((state)=> state.wishlist.itemsId);
 
     useEffect(() => {
         dispatch(getCartItems());
+
+        return ()=>{
+            dispatch(cleanCartSlice());
+        }
     }, [dispatch]);
 
 
@@ -32,9 +36,10 @@ const Cart = () => {
         {
             ...product,
             quantity: items[product.id || 0],
-            liked: wishlisteItems.includes(product.id)
+            liked: wishlistItems.includes(product.id)
         }
     ));
+
 
 
     //This is a function to dispatch the changeQuantityState action that includes the item id and it's quantity and then pass it as a props to the cartItem.
@@ -60,9 +65,7 @@ const Cart = () => {
 
     return (
         <>
-            <Headingcomponent>
-                Your Cart
-            </Headingcomponent>
+            <Headingcomponent title={"Your Cart"}/>
             {
                 /* If the cart has no items inside it then show that the cart is empty, if it has items inside it then show the cartList component. */
                 productDetails.length === 0 ?
@@ -77,7 +80,7 @@ const Cart = () => {
                             {/* This a component for subTotal amount */}
                             {/* Here we pass products that holds productDetails array coming from the cartSlice and pass it's data to Subtotal component.*/}
                             <Subtotal products={products}/>
-                            <button onClick={handleClearCart} className="bg-gray-500 text-white px-4 md:px-8 py-2 hover:bg-red-600 duration-300 cursor-pointer rounded-md w-[100px] sm:w-[200px] mt-4">Clear</button>
+                            <button type="button" onClick={handleClearCart} className="bg-gray-500 text-white px-4 md:px-8 py-2 hover:bg-red-600 duration-300 cursor-pointer rounded-md w-[100px] sm:w-[200px] mt-4">Clear</button>
                         </LoadingComponent>
                     )
             }

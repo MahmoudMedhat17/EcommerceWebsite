@@ -8,7 +8,7 @@ const Product = ({ id, title, price, img, max, quantity }: TProducts) => {
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
   // Here Initialize the productMaxReached with max value - the quantity of the item stored in the RTK store => max(4) - quantity(2) = 2.
-  const productMaxReached = max - (quantity ?? 0);
+  const productMaxReached = (max ?? 0) - (quantity ?? 0);
   // This variable is if productMaxReached = 0 then set it to true if not != 0 then it's false; so if it's true then show a msg that "You reached the max amount of this product!", if it's false then show this msg `You can add more of this product ${productMaxReached}`.
   const isMaxReached = productMaxReached == 0 ? true : false;
 

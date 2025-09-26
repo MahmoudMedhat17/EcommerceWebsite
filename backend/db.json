@@ -99,14 +99,29 @@
   ],
   "wishlist": [
     {
-      "id": "22e9",
+      "id": "80d4",
       "userId": 1,
       "productId": "6"
     },
     {
-      "id": "767c",
+      "id": "48b8",
+      "userId": 1,
+      "productId": "3"
+    },
+    {
+      "id": "3e94",
       "userId": 1,
       "productId": "1"
+    },
+    {
+      "id": "4c96",
+      "userId": 1,
+      "productId": "5"
+    },
+    {
+      "id": "3734",
+      "userId": 1,
+      "productId": "9"
     }
   ]
 }

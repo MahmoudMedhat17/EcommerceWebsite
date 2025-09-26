@@ -1,34 +1,49 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import type { TProducts } from '@/types/Products';
 
 
 
+interface IWishlistProps{
+    id:string;
+    userId:string;
+    productId:string;
+};
 
-const getWishlist = createAsyncThunk("wishlist/getWishlist",
+
+const getWishlist = createAsyncThunk("wishlist/getWihslist",
     async(_,thunkAPI)=>{
-        const {fulfillWithValue, rejectWithValue} = thunkAPI;
+        const { rejectWithValue, fulfillWithValue} = thunkAPI;
 
 
         try {
-            // Here we need to get the id of the items inside the wishlist that the userId liked.
+
+            // Here we get the wishlist products the user with ID = 1 liked.
             const userWishlist = await axios.get(`/wishlist?userId=1`);
+            
+            console.log(userWishlist.data);
 
-            // Here if there's no items inside the wishlist then return an empty array.
-            if(!userWishlist.data.length){
-                return fulfillWithValue([]);
-            };
+            // Here we map over the userWishlist to get only the productIds.
+            const userWishlistIds = userWishlist.data.map((product:IWishlistProps)=>product.productId);
 
-            // Here we get the id of the items and concate them together to be as => id=1&id=2&id=3 and so on this is of filtering id's using query params.
-            const userWishlistIds = userWishlist.data.map((item:number)=> `id=${item}`).join("&");
+            console.log(userWishlistIds);
 
-            // Here we get the products with the id of the items inside the wishlist of the user.
-            const res = await axios.get(`/products/${userWishlistIds}`);
-            console.log(res.data);
-            return res.data;
+            // Here we call the products to target the IDS of the products.
+            const allProducts = await axios.get(`/products`);
 
+            console.log(allProducts.data);
+
+            // Here we filter the IDS of the products to match the productId of each product liked in the wishlist so this userWishlistProducts variable returns only the liked products in the wishlist to display them in the wishlist.
+            const userWishlistProducts = allProducts.data.filter((product:TProducts)=>(
+                userWishlistIds.includes(product.id)
+            ));
+
+            console.log(userWishlistProducts);
+
+            return fulfillWithValue(userWishlistProducts);
         } catch (error) {
             if(axios.isAxiosError(error)){
-                const errorMessage = error?.response?.data.message || error.message || "Network Error";
+                const errorMessage = error.response?.data.message || error.message || "Network Error";
                 return rejectWithValue(errorMessage);
             }
             else{
@@ -38,7 +53,6 @@ const getWishlist = createAsyncThunk("wishlist/getWishlist",
         }
     }
 );
-
 
 
 export default getWishlist;

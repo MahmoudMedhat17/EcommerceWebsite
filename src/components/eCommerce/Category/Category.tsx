@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { TCategories } from "@/types/Categories";
 
+
 // interface ICategory{
 //   prefix:string;
 //   title:string;

@@ -23,7 +23,7 @@ const productsSlice = createSlice({
     initialState,
     reducers: {
         // Here we clean the array "records" that holds the products when the user gets out of the products page and route to another page.
-        productsCleanUp: (state) => {
+        cleanProductsSlice: (state) => {
             state.records = []
         }
     },
@@ -49,5 +49,5 @@ const productsSlice = createSlice({
 
 
 
-export const { productsCleanUp } = productsSlice.actions;
+export const { cleanProductsSlice } = productsSlice.actions;
 export default productsSlice.reducer;
