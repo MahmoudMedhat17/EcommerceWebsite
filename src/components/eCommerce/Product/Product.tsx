@@ -1,9 +1,9 @@
 import type { TProducts } from "@/types/Products";
 import { addToCart } from "@/store/cart/cartSlice";
 import { useAppDispatch } from "@/store/hooks";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 
-const Product = ({ id, title, price, img, max, quantity }: TProducts) => {
+const Product = memo(({ id, title, price, img, max, quantity }: TProducts) => {
 
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
 
@@ -51,6 +51,6 @@ const Product = ({ id, title, price, img, max, quantity }: TProducts) => {
       </div>
     </div>
   )
-}
+});
 
 export default Product;
