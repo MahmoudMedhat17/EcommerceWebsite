@@ -99,34 +99,24 @@
   ],
   "wishlist": [
     {
-      "id": "80d4",
-      "userId": 1,
-      "productId": "6"
-    },
-    {
-      "id": "48b8",
-      "userId": 1,
-      "productId": "3"
-    },
-    {
-      "id": "3e94",
+      "id": "79d6",
       "userId": 1,
       "productId": "1"
     },
     {
-      "id": "4c96",
+      "id": "a1d1",
       "userId": 1,
-      "productId": "5"
+      "productId": "6"
     },
     {
-      "id": "3734",
+      "id": "e4de",
       "userId": 1,
       "productId": "9"
     },
     {
-      "id": "6e55",
+      "id": "3243",
       "userId": 1,
-      "productId": "4"
+      "productId": "3"
     }
   ]
 }

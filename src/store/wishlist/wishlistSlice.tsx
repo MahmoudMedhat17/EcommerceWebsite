@@ -22,6 +22,7 @@ const wishlistSlice = createSlice({
     name:"wishlist",
     initialState,
     reducers:{
+        // Need this clean when user logs out only.
         cleanWishlistProductDetails:(state)=>{
             state.productDetails = []
         }

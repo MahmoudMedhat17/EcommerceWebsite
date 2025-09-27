@@ -1,5 +1,5 @@
-import {Headercart, Wishlist} from "@/components/eCommerce";
 import { Link } from "react-router-dom";
+import MainHeadericons from "@/components/common/Header/MainHeadericons/MainHeadericons";
 
 const Header = () => {
   return (
@@ -9,8 +9,7 @@ const Header = () => {
           <span className="font-semibold text-xl">E-commerce</span>
         </Link>
         <div className="flex items-center gap-4">
-        <Wishlist/>
-        <Headercart/>
+        <MainHeadericons/>
         </div>
       </div>
       <header className="bg-gray-900 mt-8">

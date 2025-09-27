@@ -7,7 +7,6 @@ import getToggleLike from "@/store/wishlist/thunk/getToggleLike";
 import { FcLike } from "react-icons/fc";
 import { FcLikePlaceholder } from "react-icons/fc";
 import { SpinnerCircular } from 'spinners-react';
-import { cleanWishlistProductDetails } from "@/store/wishlist/wishlistSlice";
 
 
 const Wishlist = () => {
@@ -28,9 +27,6 @@ const Wishlist = () => {
 
   useEffect(()=>{
     dispatch(getWishlist());
-    return () =>{
-      dispatch(cleanWishlistProductDetails());
-    }
   },[dispatch]);
 
   const handleToggleLike = (id:number) =>{
@@ -43,6 +39,9 @@ const Wishlist = () => {
     <>
       <Headingcomponent title={"Your Wishlist"}/>
       <LoadingComponent status={loading} error={error}>
+        {
+          productFullInfo.length === 0 && <p className="font-semibold text-4xl text-center">Wishlist is Empty!</p>
+        }
            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 place-items-center">
             {
               productFullInfo.map((product)=>(
