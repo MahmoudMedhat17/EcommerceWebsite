@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { TProducts } from '@/types/Products';
-
+import AxioserrorHandler from '@/utils/AxioserrorHandler';
 
 
 interface IWishlistProps{
@@ -42,14 +42,7 @@ const getWishlist = createAsyncThunk("wishlist/getWihslist",
 
             return fulfillWithValue(userWishlistProducts);
         } catch (error) {
-            if(axios.isAxiosError(error)){
-                const errorMessage = error.response?.data.message || error.message || "Network Error";
-                return rejectWithValue(errorMessage);
-            }
-            else{
-                const errorMessage = "Unexpected Error!";
-                return rejectWithValue(errorMessage);
-            }
+            return rejectWithValue(AxioserrorHandler(error));
         }
     }
 );

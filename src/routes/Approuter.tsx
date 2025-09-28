@@ -1,15 +1,28 @@
-import Mainlayout from "@/layouts/Mainlayout";
-import AboutUs from "@/pages/AboutUs";
-import Categories from "@/pages/Categories";
-import Home from "@/pages/Home";
-import Login from "@/pages/Login";
-import Products from "@/pages/Products";
-import Register from "@/pages/Register";
-import Errorpage from "@/pages/Errorpage";
-import Wishlist from "@/pages/Wishlist";
+import { lazy, Suspense } from "react";
+const Mainlayout = lazy(()=>import ("@/layouts/Mainlayout"));
+const AboutUs = lazy(()=> import("@/pages/AboutUs"));
+const Categories = lazy(()=>import("@/pages/Categories"));
+const Home = lazy(()=>import("@/pages/Home"));
+const Login = lazy(()=> import ("@/pages/Login"));
+const Products = lazy(()=> import("@/pages/Products"));
+const Register = lazy(()=> import("@/pages/Register"));
+const Errorpage = lazy(()=> import("@/pages/Errorpage"));
+const Wishlist = lazy(()=> import("@/pages/Wishlist"));
 import { Cart } from "@/components/eCommerce";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import Lazycomponent from "@/components/feedback/LazyComponent/Lazycomponent";
 
+
+// This a suspense function that takes a component as an argument and returns the component inside a suspense and the fallback is a component that holds the Loading MSG "Lazycomponent".
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const withSuspense = (Component:React.LazyExoticComponent<any>) =>{
+    return(
+        <Suspense fallback={<Lazycomponent/>}>
+            <Component/>
+        </Suspense>
+    )
+};
 
 
 const router = createBrowserRouter([
@@ -19,11 +32,11 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Home />
+                element: withSuspense(Home)
             },
             {
                 path: "/categories",
-                element: <Categories />
+                element: withSuspense(Categories)
             },
             {
                 path: "/cart",
@@ -35,7 +48,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/categories/products/:prefix",
-                element: <Products />,
+                element: withSuspense(Products),
                 // This errorElement makes this route "products/:id" falls back to the errorElement page when the params doesn't match a string.
                 errorElement: <Errorpage />,
                 // This loader is for checking if the user enters the params as a string or not so if it's not a string then don't call the API data and show the user the Bad Request "Handling error from the client side to avoid unnecessary API calls".
@@ -48,21 +61,21 @@ const router = createBrowserRouter([
             },
             {
                 path: "/aboutus",
-                element: <AboutUs />
+                element: withSuspense(AboutUs)
             },
         ]
     },
     {
         path: "/login",
-        element: <Login />
+        element: withSuspense(Login)
     },
     {
         path: "/register",
-        element: <Register />
+        element: withSuspense(Register)
     },
     {
         path: "*",
-        element: <Errorpage />
+        element: withSuspense(Errorpage)
     }
 ]);
 

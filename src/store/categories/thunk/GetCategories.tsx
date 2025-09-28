@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import AxioserrorHandler from '@/utils/AxioserrorHandler';
 
 // Here we define the Response coming from the API as an object with defined props using Types
 // type TResponse = {
@@ -22,13 +22,7 @@ const getCategories = createAsyncThunk(
             return response.data;
         } catch (error) {
             // Here we check if the error comes from Axios itself then show the rejectWithValue msg with the response msg or the msg of the error itself
-            if (axios.isAxiosError(error)) {
-                return rejectWithValue(error.response?.data.message || error.message);
-            }
-            // If it's not coming from axios then we write the error msg
-            else {
-                return rejectWithValue("Unexpected Error!");
-            }
+            return rejectWithValue(AxioserrorHandler(error));
         }
     }
 );

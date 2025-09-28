@@ -99,11 +99,6 @@
   ],
   "wishlist": [
     {
-      "id": "79d6",
-      "userId": 1,
-      "productId": "1"
-    },
-    {
       "id": "a1d1",
       "userId": 1,
       "productId": "6"
@@ -117,6 +112,11 @@
       "id": "3243",
       "userId": 1,
       "productId": "3"
+    },
+    {
+      "id": "fded",
+      "userId": 1,
+      "productId": "1"
     }
   ]
 }

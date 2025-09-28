@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import AxioserrorHandler from '@/utils/AxioserrorHandler';
 
 
 const getToggleLike = createAsyncThunk("wishlist/getToggleLike",
@@ -29,14 +29,7 @@ const getToggleLike = createAsyncThunk("wishlist/getToggleLike",
                 return {type:"add", id};
             }
         } catch (error) {
-            if(axios.isAxiosError(error)){
-                const errorMessage = error.response?.data.message || error.message || "Network Error";
-                return rejectWithValue(errorMessage);
-            }
-            else{
-                const errorMessage = "Unexpected Error";
-                return rejectWithValue(errorMessage);
-            }
+            return rejectWithValue(AxioserrorHandler(error));
         }
     }
 );

@@ -1,26 +1,11 @@
 import { Category } from "@/components/eCommerce";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import getCategories from "@/store/categories/thunk/getCategories";
 import { LoadingComponent } from "@/components/feedback";
-import { cleanCategorySlice } from "@/store/categories/categoriesSlice";
+import useCategories from "@/hooks/useCategories";
 
 const Categories = () => {
 
 
-  const dispatch = useAppDispatch();
-  const { loading, records, error } = useAppSelector((state) => state.categories);
-
-  useEffect(() => {
-    // Here this condition is for checking if the array that holds the products is empty or not if it's empty then fire the getCategories action if it's not then stop firing the getCategories action.
-    if (!records.length) {
-      dispatch(getCategories());
-      return ()=>{
-        dispatch(cleanCategorySlice());
-      };
-    }
-  }, [dispatch]);
-
+  const {loading, records, error} = useCategories();
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-10">

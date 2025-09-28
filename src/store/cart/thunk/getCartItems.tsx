@@ -1,7 +1,7 @@
 import type { RootState } from '@/store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
+import AxioserrorHandler from '@/utils/AxioserrorHandler';
 
 const getCartItems = createAsyncThunk(
     "products/getCartItems", async (_, thunkAPI) => {
@@ -47,14 +47,7 @@ const getCartItems = createAsyncThunk(
 
             return data;
         } catch (error) {
-            // Here we handle error if it's coming from API data and return the error with rejectWithValue coming from thunkAPI.
-            if (axios.isAxiosError(error)) {
-                return rejectWithValue(error.response?.data.message || error.message);
-            }
-            // Here if the error is not coming from axios and coming from the UI then we display a text that something has caused a problem while calling the data.
-            else {
-                return rejectWithValue("Unexpected error has occured!");
-            }
+            return rejectWithValue(AxioserrorHandler(error));
         }
 
     }
