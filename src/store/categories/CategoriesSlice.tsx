@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getCategories from '@/store/categories/thunk/getCategories';
-import type { TCategories } from "@/types/Categories";
+import { isString, type TCategories } from "@/types/index";
 
 // Here we define the data for records array is the data we get from the API, The Loading states with "Literal Types" and The error state with a string or null.
 interface ICategories {
@@ -41,7 +41,7 @@ const categoriesSlice = createSlice({
             // If the data fetching failed then show the custom error message coming from thunkApi from getCategories asyncThunk
             state.loading = "Failed";
             // Guard condition
-            if (action.payload && typeof action.payload === "string") {
+            if (isString(action.payload)) {
                 state.error = action.payload;
             }
         })

@@ -1,5 +1,5 @@
 import { Product } from "@/components/eCommerce";
-import { LoadingComponent } from "@/components/feedback/index";
+import { LoadingComponent, LottieHandler } from "@/components/feedback/index";
 import Headingcomponent from "@/components/eCommerce/HeadingComponent/Headingcomponent";
 import useProducts from "@/hooks/useProducts";
 
@@ -16,7 +16,7 @@ const Products = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-10">
 
         {/* Here LoadingComponent is here to display the loading state or error state when calling the data. "Better for UserExperience"*/}
-        <LoadingComponent status={loading} error={error}>
+        <LoadingComponent status={loading} error={error} loadingType="product">
           {
             // Here checking if the productsFullInfo array that contain the categories is empty or not 
             productsFullInfo.length > 0 ?
@@ -28,8 +28,10 @@ const Products = () => {
                 </div>
               )))
               :
-              // If it's empty then show this msg
-              <p className="font-semibold text-xl">"There are no products available!"</p>
+              // If it's empty then show this Animation
+              <div className="col-span-full flex justify-center items-center">
+              <LottieHandler type="notFoundAnimation"/>
+              </div>
           }
         </LoadingComponent>
       </div>

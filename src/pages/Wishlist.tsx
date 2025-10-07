@@ -14,7 +14,7 @@ const Wishlist = () => {
   return (
     <>
       <Headingcomponent title={"Your Wishlist"}/>
-      <LoadingComponent status={loading} error={error}>
+      <LoadingComponent status={loading} error={error} loadingType="cart">
         {
           productFullInfo.length === 0 && <p className="font-semibold text-4xl text-center">Wishlist is Empty!</p>
         }

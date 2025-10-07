@@ -13,13 +13,14 @@ interface IWishlistProps{
 
 const getWishlist = createAsyncThunk("wishlist/getWihslist",
     async(_,thunkAPI)=>{
-        const { rejectWithValue, fulfillWithValue} = thunkAPI;
+        // Here signal is for Http request cancellation.
+        const { rejectWithValue, fulfillWithValue, signal} = thunkAPI;
 
 
         try {
 
             // Here we get the wishlist products the user with ID = 1 liked.
-            const userWishlist = await axios.get(`/wishlist?userId=1`);
+            const userWishlist = await axios.get(`/wishlist?userId=1`,{signal:signal});
             
             // console.log(userWishlist.data);
 

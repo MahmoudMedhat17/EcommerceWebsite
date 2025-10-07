@@ -26,7 +26,8 @@ const useProducts = () => {
 
   useEffect(() => {
     if (params.prefix) {
-      dispatch(getProducts(params.prefix as string));
+      const promise = dispatch(getProducts(params.prefix as string));
+      return ()=> promise.abort();
     };
 
     return () => {

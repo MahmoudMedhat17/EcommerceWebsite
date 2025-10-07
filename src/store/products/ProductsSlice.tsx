@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { TProducts } from "@/types/Products";
+import { isString, type TProducts } from "@/types/index";
 import getProducts from '@/store/products/thunk/getProducts';
 
 
@@ -29,7 +29,7 @@ const productsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(getProducts.pending, (state) => {
-            state.loading = "Idle";
+            state.loading = "Pending";
             state.records = [];
             state.error = null;
         });
@@ -40,7 +40,7 @@ const productsSlice = createSlice({
         });
         builder.addCase(getProducts.rejected, (state, action) => {
             state.loading = "Failed";
-            if (action.payload && typeof action.payload === "string") {
+            if (isString(action.payload)) {
                 state.error = null;
             };
         });

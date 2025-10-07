@@ -21,7 +21,8 @@ const useWishlist = () => {
 
 
   useEffect(()=>{
-    dispatch(getWishlist());
+    const promise = dispatch(getWishlist());
+    return () => promise.abort();
   },[dispatch]);
 
   const handleToggleLike = (id:number) =>{

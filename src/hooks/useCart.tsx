@@ -14,9 +14,10 @@ const useCart = () => {
     const wishlistItems = useAppSelector((state)=> state.wishlist.itemsId);
 
     useEffect(() => {
-        dispatch(getCartItems());
+        const promise = dispatch(getCartItems());
 
         return ()=>{
+            promise.abort();
             dispatch(cleanCartSlice());
         }
     }, [dispatch]);
@@ -36,7 +37,6 @@ const useCart = () => {
             liked: wishlistItems.includes(product.id)
         }
     ));
-
 
 
     //This is a function to dispatch the changeQuantityState action that includes the item id and it's quantity and then pass it as a props to the cartItem.

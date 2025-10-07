@@ -6,8 +6,8 @@ import AxioserrorHandler from '@/utils/AxioserrorHandler';
 const getCartItems = createAsyncThunk(
     "products/getCartItems", async (_, thunkAPI) => {
 
-        // Here we call rejectWithValue & getState & fulfillWithValue from thunkAPI.
-        const { rejectWithValue, getState, fulfillWithValue } = thunkAPI;
+        // Here we call rejectWithValue & getState & fulfillWithValue & signl for Http request cancellation from thunkAPI.
+        const { rejectWithValue, getState, fulfillWithValue, signal } = thunkAPI;
         const state = getState() as RootState;
         // Here we get the current state of the store of the cart.items.
         const cart = state.cart.items;
@@ -26,7 +26,7 @@ const getCartItems = createAsyncThunk(
         // Here with Try & Catch we call the API data using axios and handle the errors.
         try {
             // Get the data of /products with the modified ids we created above => productIds.
-            const res = await axios.get(`/products?${productIds}`);
+            const res = await axios.get(`/products?${productIds}`,{signal:signal});
 
             // Here we assign data variable with data coming from the API. 
             let data = res.data;

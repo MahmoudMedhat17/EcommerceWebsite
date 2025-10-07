@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getToggleLike from '@/store/wishlist/thunk/getToggleLike';
 import getWishlist from '@/store/wishlist/thunk/getWishlist';
-import type {TProducts} from "@/types/Products";
+import {isString, type TProducts} from "@/types/index";
 
 interface IinitialStateprops{
     itemsId:number[];
@@ -45,7 +45,7 @@ const wishlistSlice = createSlice({
             }
         });
         builder.addCase(getToggleLike.rejected,(state,action)=>{
-            if(action.payload && typeof action.payload === "string"){
+            if(isString(action.payload)){
                 state.error = action.payload;
             }
         });
@@ -61,7 +61,7 @@ const wishlistSlice = createSlice({
         });
         builder.addCase(getWishlist.rejected,(state,action)=>{
             state.loading = "Failed";
-            if(action.payload && typeof action.payload === "string"){
+            if(isString(action.payload)){
                 state.error = action.payload;
             }
         })

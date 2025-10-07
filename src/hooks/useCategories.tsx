@@ -12,8 +12,9 @@ const useCategories = () => {
   useEffect(() => {
     // Here this condition is for checking if the array that holds the products is empty or not if it's empty then fire the getCategories action if it's not then stop firing the getCategories action.
     if (!records.length) {
-      dispatch(getCategories());
+      const promise = dispatch(getCategories());
       return ()=>{
+        promise.abort();
         dispatch(cleanCategorySlice());
       };
     }

@@ -1,5 +1,5 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
-import type { TProducts } from '@/types/Products';
+import { isString, type TProducts } from '@/types/index';
 import type { RootState } from '@/store/index';
 import getCartItems from './thunk/getCartItems';
 
@@ -75,7 +75,7 @@ export const cartSlice = createSlice({
         });
         builder.addCase(getCartItems.rejected, (state, action) => {
             state.loading = "Failed";
-            if (action.payload && typeof action.payload === "string") {
+            if (isString(action.payload)) {
                 // Here intialize the error with the error coming from the API.
                 state.error = action.payload;
             }

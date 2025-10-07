@@ -15,10 +15,11 @@ const getCategories = createAsyncThunk(
     "categories/getCategories",
     async (_, thunkAPI) => {
 
-        const { rejectWithValue } = thunkAPI;
+        // Here signal is for Http request cancellation.
+        const { rejectWithValue, signal } = thunkAPI;
 
         try {
-            const response = await axios.get("http://localhost:5000/categories");
+            const response = await axios.get("http://localhost:5000/categories", {signal:signal});
             return response.data;
         } catch (error) {
             // Here we check if the error comes from Axios itself then show the rejectWithValue msg with the response msg or the msg of the error itself
