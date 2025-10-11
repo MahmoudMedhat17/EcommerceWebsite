@@ -23,7 +23,7 @@ const Categories = () => {
               :
               // If it's empty then show this msg
               <>
-              <p className="font-semibold text-xl">"There are no categories available!"</p>
+                <p className="font-semibold text-xl">"There are no categories available!"</p>
               </>
           ))
         }

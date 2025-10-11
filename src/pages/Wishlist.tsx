@@ -1,7 +1,7 @@
 import useWishlist from "@/hooks/useWishlist";
 import Headingcomponent from "@/components/eCommerce/HeadingComponent/Headingcomponent";
 import { LoadingComponent } from "@/components/feedback";
-
+import {LottieHandler} from "@/components/feedback";
 import { FcLike } from "react-icons/fc";
 import { FcLikePlaceholder } from "react-icons/fc";
 import { SpinnerCircular } from 'spinners-react';
@@ -16,7 +16,10 @@ const Wishlist = () => {
       <Headingcomponent title={"Your Wishlist"}/>
       <LoadingComponent status={loading} error={error} loadingType="cart">
         {
-          productFullInfo.length === 0 && <p className="font-semibold text-4xl text-center">Wishlist is Empty!</p>
+          productFullInfo.length === 0 && 
+          <div className="flex flex-col justify-center items-center h-screen space-y-4">
+            <LottieHandler type="emptyAnimation" message="Your wishlist is empty!"/>
+          </div>
         }
            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 place-items-center">
             {

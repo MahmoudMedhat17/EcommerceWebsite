@@ -30,7 +30,7 @@ const Products = () => {
               :
               // If it's empty then show this Animation
               <div className="col-span-full flex justify-center items-center">
-              <LottieHandler type="notFoundAnimation"/>
+                <LottieHandler type="notFoundAnimation"/>
               </div>
           }
         </LoadingComponent>

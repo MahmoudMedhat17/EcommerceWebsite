@@ -28,7 +28,7 @@ const withSuspense = (Component:React.LazyExoticComponent<any>) =>{
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Mainlayout />,
+        element: withSuspense(Mainlayout),
         children: [
             {
                 index: true,
@@ -63,15 +63,15 @@ const router = createBrowserRouter([
                 path: "/aboutus",
                 element: withSuspense(AboutUs)
             },
+            {
+                path: "/login",
+                element: withSuspense(Login)
+            },
+            {
+                path: "/register",
+                element: withSuspense(Register)
+            },
         ]
-    },
-    {
-        path: "/login",
-        element: withSuspense(Login)
-    },
-    {
-        path: "/register",
-        element: withSuspense(Register)
     },
     {
         path: "*",

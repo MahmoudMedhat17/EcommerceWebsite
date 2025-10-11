@@ -3,7 +3,7 @@ import { LoadingComponent } from "@/components/feedback";
 import Subtotal from "@/components/eCommerce/Cart/Subtotal";
 import CartList from "@/components/eCommerce/Cart/CartList";
 import useCart from "@/hooks/useCart";
-
+import {LottieHandler} from "@/components/feedback";
 
 const Cart = () => {
 
@@ -17,11 +17,13 @@ const Cart = () => {
                 /* If the cart has no items inside it then show that the cart is empty, if it has items inside it then show the cartList component. */
                 productDetails.length === 0 ?
                     (
-                        <p className="font-semibold text-4xl text-center">Cart is Empty!</p>
+                        <div className="flex flex-col justify-center items-center h-screen space-y-4">
+                            <LottieHandler type="emptyAnimation" message="Your cart is empty!"/>
+                        </div>
                     )
                     :
                     (
-                        <LoadingComponent status={loading} error={error}>
+                        <LoadingComponent status={loading} error={error} loadingType="cart">
                             {/* Here we create a component that holds all the cartItems and pass the products we get from the cartSlice to it so we can use the props of this slice inside this component. */}
                             <CartList products={products} changeQuantity={changeQuantity} deleteItems={deleteItems}/>
                             {/* This a component for subTotal amount */}

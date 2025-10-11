@@ -1,7 +1,7 @@
 import LoadingCategories from "@/components/feedback/LoadingMessages/LoadingCategories";
 import LoadingProducts from "@/components/feedback/LoadingMessages/LoadingProducts";
 import LoadingCart from "@/components/feedback/LoadingMessages/LoadingCart";
-
+import {LottieHandler} from "@/components/feedback/index";
 
 interface IloadingComponent {
   status: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
@@ -45,7 +45,7 @@ const LoadingComponent = ({ status, error, children, loadingType }: IloadingComp
 
   // Here we check if the Status of the data is Failed to call then show for the user the Error.
   if (status === "Failed") {
-    return <div className="text-2xl font-semibold text-center">{error}</div>
+    return <div className="col-span-full flex flex-col justify-center items-center"><LottieHandler type="errorAnimation" message="Network Error"/>{error}</div>
   };
 
   // Here we check if the Status of the data is Succeeded then show for the user the data.
