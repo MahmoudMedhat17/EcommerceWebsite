@@ -97,5 +97,10 @@
       "max": 2
     }
   ],
-  "wishlist": []
+  "wishlist": [],
+  "users":[
+    {
+      "email":"m7moooud.17@gmail.com"
+    }
+  ]
 }
