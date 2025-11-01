@@ -98,9 +98,13 @@
     }
   ],
   "wishlist": [],
-  "users":[
+  "users": [
     {
-      "email":"m7moooud.17@gmail.com"
+      "email": "AhmedAtef17@gmail.com",
+      "password": "$2a$10$S7f2scuWINq3nAInmpbpMOCvdqfDj.PkjZ3A59tSq4oc.CjWyLT1C",
+      "firstName": "Ahmed",
+      "lastName": "Atef",
+      "id": 1
     }
   ]
 }

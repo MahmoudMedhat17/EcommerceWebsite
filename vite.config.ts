@@ -35,6 +35,9 @@ export default defineConfig({
         changeOrigin: true,
         secure:false,
         rewrite: (path) => path.replace(/^\/wishlist/, "/wishlist"),
+      },
+      "users":{
+        target:"http://localhost:5000"
       }
     }
   }

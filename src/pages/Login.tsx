@@ -19,11 +19,11 @@ const Login = () => {
       <Headingcomponent title="Login" />
       <form onSubmit={handleSubmit(submitForm)} className="flex justify-center items-center my-4">
         <div className="p-4 sm:p-8 shadow-xl w-full sm:w-1/2">
-          <Forminput label="Email" placeHolder="Email" type="text" register={register} name="Email" error={errors.Email?.message}/>
+          <Forminput label="Email" placeHolder="Email" type="text" register={register} name="email" error={errors.email?.message}/>
           {/* <p className="text-red-500">
             {errors.Email?.message}
           </p> */}
-          <Forminput label="Password" placeHolder="Password" type="password" register={register} name="Password" error={errors.Password?.message}/>
+          <Forminput label="Password" placeHolder="Password" type="password" register={register} name="password" error={errors.password?.message}/>
           {/* <p className="text-red-500">
             {errors.Password?.message}
           </p> */}

@@ -2,6 +2,7 @@ import categoriesSlice from "@/store/categories/categoriesSlice";
 import productsSlice from "@/store/products/productsSlice";
 import cartSlice from '@/store/cart/cartSlice';
 import wishlistSlice from "@/store/wishlist/wishlistSlice";
+import authSlice from "@/store/auth/authSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; 
@@ -35,7 +36,8 @@ const rootReducers = combineReducers({
     products:productsSlice,
     // Here we apply persistReducer to cart as we want to cache the items inside the cart.
     cart:persistReducer(cartPresistConfig, cartSlice),
-    wishlist:persistReducer(wishlistPresistConfig, wishlistSlice)
+    wishlist:persistReducer(wishlistPresistConfig, wishlistSlice),
+    auth:authSlice
 });
 
 export default rootReducers;

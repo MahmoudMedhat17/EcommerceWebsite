@@ -2,8 +2,8 @@ import {z} from "zod";
 
 
 const LoginSchema = z.object({
-    Email:z.email({message:"Invalid Email Address."}),
-    Password:z.string().min(1,{message:"Password is not correct!"})
+    email:z.email({message:"Invalid Email Address."}),
+    password:z.string().min(1,{message:"Password is not correct!"})
 });
 
 

@@ -4,11 +4,14 @@ import { Forminput } from "@/components/forms/index";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpSchema, type SignUpData } from "@/validations/SignUpSchema";
 import useCheckEmailAvailability from "@/hooks/useCheckEmailAvailability";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import getAuth from "@/store/auth/thunk/getAuth";
+// import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
 
-  const {register, handleSubmit, formState:{errors}, getFieldState, trigger} = useForm<SignUpData>({
+  const {register, handleSubmit, formState:{errors}, getFieldState, trigger,} = useForm<SignUpData>({
     // Here the resolver is to connect between the Zod validation and the form from React-hook form with the schema we implemented above.
     mode:"onBlur",
     resolver:zodResolver(SignUpSchema),
@@ -16,17 +19,40 @@ const Register = () => {
 
   const {prevEmail, handleCheckEmailAvailability, checkEmailAvailability, resetCheckEmailAvailability} = useCheckEmailAvailability();
 
-  const submitForm: SubmitHandler<SignUpData> = (data)=> console.log(data);
+  const {loading, error} = useAppSelector((state)=> state.auth);
+  const dispatch = useAppDispatch();
+
+  // const navigate = useNavigate();
+
+  const submitForm: SubmitHandler<SignUpData> = async (data)=> {
+    console.log(data)
+    // The Refresh error is probably here!
+    const {firstName,lastName,email,password} = data; 
+    // I added the try catch to fix the error but nothing happened LOL.
+  try {
+        console.log("🟡 BEFORE dispatch");
+
+      const result = await dispatch(getAuth({firstName, lastName, email, password})).unwrap();
+      console.log("Registration successful!");
+      console.log("🟢 AFTER dispatch SUCCESS", result);
+    alert("Success! Did it reload?");
+
+  } catch (error) {
+    console.log("Registration failed:", error);
+   console.log("🔴 AFTER dispatch ERROR", error);
+    alert("Error! Did it reload?");
+  }}
+
+
+
+  
 
   const handleEmailOnblur = async(e:React.FocusEvent<HTMLInputElement>) =>{
-    console.log(e);
-
+    // e.preventDefault();
     // Here trigger is for triggering the Email input to check if it's valid or not.
-    await trigger("Email");
+    await trigger("email");
     const value = e.target.value;
-    const {isDirty, invalid} = getFieldState("Email");
-    console.log("Field is not empty", isDirty);
-    console.log("Email input", invalid);
+    const {isDirty, invalid} = getFieldState("email");
 
     // Here we check if the input is not empty => isDirty and input is an actual Email and not random text and that Email the user enters is not the same as stored in the database to let the validation works since we don't want the validation to work everytime except when there's someting inside the input field and it's an actual Email and not the same Email the user used before.
     if(isDirty && !invalid && prevEmail !== value){
@@ -37,34 +63,27 @@ const Register = () => {
     if(isDirty && invalid && prevEmail){
       resetCheckEmailAvailability();
     };
+    
+    console.log(checkEmailAvailability);
   }
   
   return (
     <>
       <Headingcomponent title="Registeration" />
-      <form action="" className="flex justify-center items-center my-4" onSubmit={handleSubmit(submitForm)}>
+      <form  className="flex justify-center items-center my-4" onSubmit={handleSubmit(submitForm)}>
         <div className="p-4 sm:p-8 shadow-xl w-full sm:w-1/2">
-          <Forminput label="FirstName" placeHolder="FirstName" type="text" register={register} name="FirstName" error={errors.FirstName?.message}/>
+          <Forminput label="FirstName" placeHolder="FirstName" type="text" register={register} name="firstName" error={errors.firstName?.message}/>
           {/* <p className="text-red-500">
             {errors.FirstName?.message}
           </p> */}
-          <Forminput label="LastName" placeHolder="LastName" type="text" register={register} name="LastName" error={errors.LastName?.message}/>
-          {/* <p className="text-red-500">
-            {errors.LastName?.message}
-          </p> */}
-          <Forminput label="Email" placeHolder="Email" type="text" register={register} name="Email" error={errors.Email?.message} onBlur={handleEmailOnblur}/>
-          {/* <p className="text-red-500">
-            {errors.Email?.message}
-          </p> */}
-          <Forminput label="Password" placeHolder="Password" type="password" register={register} name="Password" error={errors.Password?.message}/>
-          {/* <p className="text-red-500">
-            {errors.Password?.message}
-          </p> */}
-          <Forminput label="Confirm Password" placeHolder="Confirm Password" type="password" register={register} name="ConfirmPassword" error={errors.ConfirmPassword?.message}/>
-          {/* <p className="text-red-500">
-            {errors.ConfirmPassword?.message}
-          </p> */}
-          <button className="cursor-pointer bg-blue-500 text-white py-1 px-2.5 rounded-sm mt-3">Submit</button>
+          <Forminput label="LastName" placeHolder="LastName" type="text" register={register} name="lastName" error={errors.lastName?.message}/>
+          <Forminput label="Email" placeHolder="Email" type="text" register={register} name="email" error={errors.email?.message} onBlur={handleEmailOnblur} checkEmail={checkEmailAvailability === "Checking" ? "Checking The Email Availability..." : checkEmailAvailability === "Failed" ? "Error Checking Email" : checkEmailAvailability === "Taken" ? "Email is already Taken !" : ""} success={checkEmailAvailability === "Available" ? "This Email is Available!" : ""}/>
+          <Forminput label="Password" placeHolder="Password" type="password" register={register} name="password" error={errors.password?.message}/>
+          <Forminput label="Confirm Password" placeHolder="Confirm Password" type="password" register={register} name="confirmPassword" error={errors.confirmPassword?.message}/>
+          <button type="submit" disabled={checkEmailAvailability === "Checking" || loading === "Pending"} className="cursor-pointer bg-blue-500 text-white py-1 px-2.5 rounded-sm mt-3">
+            {loading === "Pending" ? "Loading..." : "Submit"}
+          </button>
+          {error && <p className="mt-4 text-red-500">{error}</p>}
         </div>
       </form>
     </>
