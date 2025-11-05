@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import getAuth from '@/store/auth/thunk/getAuth';
+import getAuthRegister from '@/store/auth/thunk/getAuthRegister';
 import { isString } from '@/types';
-
 
 interface IAuthState{
     loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
@@ -18,19 +17,20 @@ const authSlice = createSlice({
     initialState,
     reducers:{},
     extraReducers:(builder)=>{
-        // Regitser
-        builder.addCase(getAuth.pending,(state)=>{
-            state.loading ="Pending";
+        // Register
+        builder.addCase(getAuthRegister.pending,(state)=>{
+            state.loading = 'Pending';
             state.error = null;
         });
-        builder.addCase(getAuth.fulfilled,(state)=>{
+        builder.addCase(getAuthRegister.fulfilled,(state)=>{
             state.loading = "Succeeded";
+            state.error = null;
         });
-        builder.addCase(getAuth.rejected,(state,action)=>{
+        builder.addCase(getAuthRegister.rejected,(state,action)=>{
             state.loading = "Failed";
             if(isString(action.payload)){
                 state.error = action.payload;
-            };
+            }
         })
     }
 });

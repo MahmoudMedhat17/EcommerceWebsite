@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpSchema, type SignUpData } from "@/validations/SignUpSchema";
 import useCheckEmailAvailability from "@/hooks/useCheckEmailAvailability";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import getAuth from "@/store/auth/thunk/getAuth";
-// import { useNavigate } from "react-router-dom";
+import getAuthRegister from "@/store/auth/thunk/getAuthRegister";
+import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
@@ -22,7 +22,7 @@ const Register = () => {
   const {loading, error} = useAppSelector((state)=> state.auth);
   const dispatch = useAppDispatch();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const submitForm: SubmitHandler<SignUpData> = async (data)=> {
     console.log(data)
@@ -32,20 +32,12 @@ const Register = () => {
   try {
         console.log("🟡 BEFORE dispatch");
 
-      const result = await dispatch(getAuth({firstName, lastName, email, password})).unwrap();
-      console.log("Registration successful!");
+      const result = await dispatch(getAuthRegister({firstName, lastName, email, password})).unwrap().then(()=> navigate(`/login?message=${firstName} Successfully Registered`));
       console.log("🟢 AFTER dispatch SUCCESS", result);
-    alert("Success! Did it reload?");
-
   } catch (error) {
     console.log("Registration failed:", error);
-   console.log("🔴 AFTER dispatch ERROR", error);
-    alert("Error! Did it reload?");
-  }}
+  }};
 
-
-
-  
 
   const handleEmailOnblur = async(e:React.FocusEvent<HTMLInputElement>) =>{
     // e.preventDefault();

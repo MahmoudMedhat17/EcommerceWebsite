@@ -12,17 +12,13 @@ interface IFormData {
 
 
 
-const getAuth = createAsyncThunk("auth/getAuth", async (formData: IFormData,thunk)=>{
+const getAuthRegister = createAsyncThunk("auth/getAuth", async (formData: IFormData,thunk)=>{
 
     const {rejectWithValue} = thunk;
 
 
     try {
-        const res = await axios.post("http://localhost:5000/register",formData,
-            {
-                maxRedirects:0,
-                validateStatus:(status) => status < 400
-            });
+        const res = await axios.post("http://localhost:5000/register",formData);
         console.log(res.data);
         return res.data;
     } catch (error) {
@@ -31,4 +27,4 @@ const getAuth = createAsyncThunk("auth/getAuth", async (formData: IFormData,thun
 });
 
 
-export default getAuth;
+export default getAuthRegister;
