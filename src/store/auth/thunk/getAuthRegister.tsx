@@ -12,9 +12,9 @@ interface IFormData {
 
 
 
-const getAuthRegister = createAsyncThunk("auth/getAuth", async (formData: IFormData,thunk)=>{
+const getAuthRegister = createAsyncThunk("auth/getAuthRegister", async (formData: IFormData,thunkAPI)=>{
 
-    const {rejectWithValue} = thunk;
+    const {rejectWithValue} = thunkAPI;
 
 
     try {

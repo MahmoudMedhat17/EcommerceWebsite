@@ -1,21 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getAuthRegister from '@/store/auth/thunk/getAuthRegister';
+import getAuthLogin from './thunk/getAuthLogin';
 import { isString } from '@/types';
 
 interface IAuthState{
     loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
     error: string | null;
+    accessToken:string | null;
+    user:{
+        id:number;
+        email:string;
+        firstName:string;
+        lastName:string;
+    } | null;
 }
 
 const initialState: IAuthState = {
     loading:"Idle",
-    error:null
+    error:null,
+    accessToken:null,
+    user:null
 };
 
 const authSlice = createSlice({
     name:"auth",
     initialState,
-    reducers:{},
+    reducers:{
+        resetErrors:(state)=>{
+            state.loading = "Idle";
+            state.error = null;
+        },
+    },
     extraReducers:(builder)=>{
         // Register
         builder.addCase(getAuthRegister.pending,(state)=>{
@@ -32,9 +47,25 @@ const authSlice = createSlice({
                 state.error = action.payload;
             }
         })
+        // Login
+        builder.addCase(getAuthLogin.pending,(state)=>{
+            state.loading = "Pending";
+            state.error = null;
+        });
+        builder.addCase(getAuthLogin.fulfilled,(state,action)=>{
+            state.loading = "Succeeded";
+            state.accessToken = action.payload.accessToken;
+            state.user = action.payload.user;
+        });
+        builder.addCase(getAuthLogin.rejected,(state,action)=>{
+            state.loading = "Failed";
+            if(isString(action.payload)){
+                state.error = action.payload;
+            }
+        })
     }
 });
 
 
-
+export const {resetErrors} = authSlice.actions;
 export default authSlice.reducer;

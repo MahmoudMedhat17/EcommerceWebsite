@@ -4,18 +4,43 @@ import { Forminput } from "@/components/forms/index";
 import { LoginSchema, type LoginData } from "@/validations/LoginSchema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useSearchParams } from "react-router-dom";
-
+import { useAppDispatch } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
+import getAuthLogin from "@/store/auth/thunk/getAuthLogin";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { resetErrors } from "@/store/auth/authSlice";
 
 const Login = () => {
 
+  // Here we use searchParams from react router dom to get the message from the url and use it to display the message to the user when he registered an email.
   const [searchParams] = useSearchParams();
+  // Here the msg we get using searchParams.
   const msg = searchParams.get("message");
+  // Here we use navigate from react router dom to navigate to another page.
+  const navigate = useNavigate();
+
   const {register, handleSubmit, formState:{errors}} = useForm<LoginData>({
     mode:"onBlur",
     resolver:zodResolver(LoginSchema)
   });
 
-  const submitForm: SubmitHandler<LoginData> = (data) => console.log(data);
+  const dispatch = useAppDispatch();
+
+  const {loading, error} = useAppSelector((state)=> state.auth);
+
+  const submitForm: SubmitHandler<LoginData> = async (data) => {
+    const {email,password} = data;
+    // Here we dispatch the thunk of getAuthLogin and then when user successfully login then redirect the user to the main page.
+    await dispatch(getAuthLogin({email,password})).unwrap().then(()=>navigate("/"));
+  };
+
+  //Here this useEffect is for reseting the UI errors for Login and Register pages. When the error message appears this useEffect prevents the msg to appear in both forms and appears only at the form with the error only. 
+  useEffect(()=>{
+    return ()=>{
+      dispatch(resetErrors());
+    }
+  },[dispatch]);
   
   return (
     <>
@@ -33,7 +58,13 @@ const Login = () => {
           {/* <p className="text-red-500">
             {errors.Password?.message}
           </p> */}
-          <button className="cursor-pointer bg-blue-500 text-white py-1 px-2.5 rounded-sm mt-3">Login</button>
+          <button className="cursor-pointer bg-blue-500 text-white py-1 px-2.5 rounded-sm mt-3">
+            {
+            loading === "Pending" ?
+            "Loading..." : "Login"
+            }
+          </button>
+          {error && <p className="text-red-500 w-full block mx-auto text-center mt-4">{error}</p>}
         </div>
       </form>
     </>

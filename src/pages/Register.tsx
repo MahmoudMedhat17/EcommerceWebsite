@@ -7,7 +7,8 @@ import useCheckEmailAvailability from "@/hooks/useCheckEmailAvailability";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import getAuthRegister from "@/store/auth/thunk/getAuthRegister";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
+import { resetErrors } from "@/store/auth/authSlice";
 
 const Register = () => {
 
@@ -57,7 +58,12 @@ const Register = () => {
     };
     
     console.log(checkEmailAvailability);
-  }
+  };
+
+  //Here this useEffect is for reseting the UI errors for Login and Register pages. When the error message appears this useEffect prevents the msg to appear in both forms and appears only at the form with the error only. 
+  useEffect(()=>{
+    dispatch(resetErrors());
+  },[dispatch]);
   
   return (
     <>
@@ -75,7 +81,7 @@ const Register = () => {
           <button type="submit" disabled={checkEmailAvailability === "Checking" || loading === "Pending"} className="cursor-pointer bg-blue-500 text-white py-1 px-2.5 rounded-sm mt-3">
             {loading === "Pending" ? "Loading..." : "Submit"}
           </button>
-          {error && <p className="mt-4 text-red-500">{error}</p>}
+          {error && <p className="text-red-500 w-full block mx-auto text-center mt-4">{error}</p>}
         </div>
       </form>
     </>

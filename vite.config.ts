@@ -42,7 +42,10 @@ export default defineConfig({
     },
     watch:{
       // This line disables the json-auth watch ability when new data is stored inside json so we can prevent reloading of the browser when the form is submitted to store a new user.
-      ignored:["./backend/db.json"]
+      ignored:[
+        "**/db.json",
+        "**/node_modules/**"
+      ]
     }
   }
 });
