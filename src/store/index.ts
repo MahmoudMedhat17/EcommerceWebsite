@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, FLUSH, PAUSE, PERSIST, PURGE, REHYDRATE, REGISTER } from 'redux-persist';
-import rootReducers from './rootReducers';
+import presistedReducer from '@/store/rootReducers';
 
 export const ReduxStore = configureStore({
-  reducer: rootReducers,
+  reducer: presistedReducer,
   middleware: (getDefaultMiddleware) =>
     // Here this middleware to disable objects from Redux Persist.
     getDefaultMiddleware({

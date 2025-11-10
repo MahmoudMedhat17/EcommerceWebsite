@@ -27,14 +27,9 @@ const Register = () => {
 
   const submitForm: SubmitHandler<SignUpData> = async (data)=> {
     console.log(data)
-    // The Refresh error is probably here!
     const {firstName,lastName,email,password} = data; 
-    // I added the try catch to fix the error but nothing happened LOL.
   try {
-        console.log("🟡 BEFORE dispatch");
-
-      const result = await dispatch(getAuthRegister({firstName, lastName, email, password})).unwrap().then(()=> navigate(`/login?message=${firstName} Successfully Registered`));
-      console.log("🟢 AFTER dispatch SUCCESS", result);
+    await dispatch(getAuthRegister({firstName, lastName, email, password})).unwrap().then(()=> navigate(`/login?message=${firstName} Successfully Registered`));
   } catch (error) {
     console.log("Registration failed:", error);
   }};

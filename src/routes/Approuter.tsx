@@ -8,10 +8,12 @@ const Products = lazy(()=> import("@/pages/Products"));
 const Register = lazy(()=> import("@/pages/Register"));
 const Errorpage = lazy(()=> import("@/pages/Errorpage"));
 const Wishlist = lazy(()=> import("@/pages/Wishlist"));
+const Profile = lazy(()=>import("@/pages/Profile"));
+const Orders = lazy(()=>import("@/pages/Orders"));
 import { Cart } from "@/components/eCommerce";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import Lazycomponent from "@/components/feedback/LazyComponent/Lazycomponent";
-
+import ProtectedRoutes from "@/Auth/ProtectedRoutes";
 
 // This a suspense function that takes a component as an argument and returns the component inside a suspense and the fallback is a component that holds the Loading MSG "Lazycomponent".
 
@@ -38,14 +40,7 @@ const router = createBrowserRouter([
                 path: "/categories",
                 element: withSuspense(Categories)
             },
-            {
-                path: "/cart",
-                element: <Cart />
-            },
-            {
-                path:"/wishlist",
-                element:<Wishlist/>
-            },
+            
             {
                 path: "/categories/products/:prefix",
                 element: withSuspense(Products),
@@ -63,6 +58,28 @@ const router = createBrowserRouter([
                 path: "/aboutus",
                 element: withSuspense(AboutUs)
             },
+            {
+                path: "/cart",
+                element: <Cart />
+            },
+            // Here this Protected Routes component to protect the Routes when the user is not logged in so the user doesn't has any access to Cart or Wishlist until he / she logs in.
+            {
+                element:<ProtectedRoutes/>,
+                children:[
+                {
+                    path:"/wishlist",
+                    element:<Wishlist/>
+                },
+                {
+                    path:"/profile",
+                    element:<Profile/>
+                },
+                {
+                    path:"orders",
+                    element:<Orders/>
+                }
+                ]
+            },  
             {
                 path: "/login",
                 element: withSuspense(Login)

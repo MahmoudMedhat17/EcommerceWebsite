@@ -1,7 +1,22 @@
 import { Link } from "react-router-dom";
 import MainHeadericons from "@/components/common/Header/MainHeadericons/MainHeadericons";
+import { useAppDispatch } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
+import { authLogout } from "@/store/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+
+
+  const dispatch = useAppDispatch();
+  const { user, accessToken } = useAppSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const handleLogout = () =>{
+    dispatch(authLogout());
+    navigate("/");
+  };
+
   return (
     <header className="pt-2">
       <div className="flex justify-between items-center">
@@ -9,7 +24,7 @@ const Header = () => {
           <span className="font-semibold text-xl">E-commerce</span>
         </Link>
         <div className="flex items-center gap-4">
-        <MainHeadericons/>
+          <MainHeadericons />
         </div>
       </div>
       <header className="bg-gray-900 mt-8">
@@ -18,11 +33,11 @@ const Header = () => {
             <nav aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
                 <Link to={"/"} className="text-gray-500 transition hover:text-gray-500/75">
-                  Home 
+                  Home
                 </Link>
 
                 <Link to={"/categories"} className="text-gray-500 transition hover:text-gray-500/75">
-                  Categories 
+                  Categories
                 </Link>
 
                 <Link to={"/aboutus"} className="text-gray-500 transition hover:text-gray-500/75">
@@ -31,39 +46,73 @@ const Header = () => {
               </ul>
             </nav>
 
-            <div className="flex items-center gap-4">
-              <div className="sm:flex sm:gap-4">
-                <Link
-                  className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                  to={"/login"}
-                >
-                  Login
-                </Link>
+            {
+              // Here with accessToken we decide if the accessToken is available then show the name of the user and a dropdown menu that shows Profile, Orders and Logout pages.
+              accessToken ?
+                (
+                  <div className="relative w-fit group transition">
+                    <Link to="/" className="font-medium text-white">
+                    {/* Here we display the firstName of the user who Registered their profile. */}
+                      {`${user?.firstName}`}
+                    </Link>
 
-                <Link
-                  className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-                  to={"/register"}
-                >
-                  Register
-                </Link>
-              </div>
+                    <div className="absolute w-fit bg-white text-black opacity-0 scale-y-0 group-hover:opacity-100 group-hover:scale-y-100 transition-all duration-300 ease-in-out origin-top">
+                      <div className="p-3">
+                        <Link to={"/profile"}>
+                          <p className="font-medium cursor-pointer mb-3">
+                            Profile
+                          </p>
+                        </Link>
+                        <Link to={"/orders"}>
+                          <p className="font-medium cursor-pointer mb-3">
+                            Orders
+                          </p>
+                        </Link>
+                          <p className="font-medium cursor-pointer" onClick={handleLogout}>
+                            Logout
+                          </p>
+                      </div>
+                    </div>
+                  </div>
+                )
+                :
+                // If the accessToken is not available then show the Register and Login buttons.
+                (
+                  <div className="flex items-center gap-4">
+                    <div className="sm:flex sm:gap-4">
+                      <Link
+                        className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
+                        to={"/login"}
+                      >
+                        Login
+                      </Link>
 
-              <button
-                className="block rounded-sm bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
-              >
-                <span className="sr-only">Toggle menu</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="size-5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-            </div>
+                      <Link
+                        className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
+                        to={"/register"}
+                      >
+                        Register
+                      </Link>
+                    </div>
+
+                    <button
+                      className="block rounded-sm bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden"
+                    >
+                      <span className="sr-only">Toggle menu</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="size-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                      </svg>
+                    </button>
+                  </div>
+                )
+            }
           </div>
         </div>
       </header>

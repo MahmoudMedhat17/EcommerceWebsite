@@ -9,11 +9,11 @@ import storage from 'redux-persist/lib/storage';
 
 
 // Here is the nomral config
-// const rootPersistConfig = {
-//   key: 'root',
-//   storage,
-//   whitelist:["cart"]
-// };
+const rootPresistConfig = {
+    key:"root",
+    storage,
+    whiteList:["cart","auth"]
+};
 
 // Here we target the items to be only cached from the cart and not all the cart "Items & productsInfo array".
 const cartPresistConfig = {
@@ -30,6 +30,12 @@ const wishlistPresistConfig = {
     whitelist:["itemsId"]
 };
 
+const authPresistConfig = {
+    key:"auth",
+    storage,
+    whiteList:["user", "accessToken"]
+};
+
 // Here we combine reducers to use them in configureStore.
 const rootReducers = combineReducers({
     categories: categoriesSlice,
@@ -37,7 +43,10 @@ const rootReducers = combineReducers({
     // Here we apply persistReducer to cart as we want to cache the items inside the cart.
     cart:persistReducer(cartPresistConfig, cartSlice),
     wishlist:persistReducer(wishlistPresistConfig, wishlistSlice),
-    auth:authSlice
+    auth:persistReducer(authPresistConfig, authSlice)
 });
 
-export default rootReducers;
+const presistedReducer = persistReducer(rootPresistConfig, rootReducers)
+
+
+export default presistedReducer;

@@ -3,11 +3,13 @@ import axios from "axios";
 import AxioserrorHandler from "@/utils/AxioserrorHandler";
 
 
+// This is what the Login form takes => Email & Password.
 interface IFormData{
     email:string;
     password:string;
 };
 
+// This the Response we get from JSON-Auth => /Login .
 interface IResponseData{
     accessToken:string;
     user:{
@@ -16,7 +18,7 @@ interface IResponseData{
         firstName:string;
         lastName:string;
     };
-}
+};
 
 const getAuthLogin = createAsyncThunk("auth/getAuthLogin", async(formData:IFormData,thunkAPI)=>{
 

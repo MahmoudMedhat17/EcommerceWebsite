@@ -26,10 +26,16 @@ const authSlice = createSlice({
     name:"auth",
     initialState,
     reducers:{
+        // This reducer is to reset the errors shown to the user like "Incorrect Password" Msg.
         resetErrors:(state)=>{
             state.loading = "Idle";
             state.error = null;
         },
+        // This reducer is to reset the state of the user and accessToken when the user Logs out of his account.
+        authLogout:(state)=>{
+            state.user = null;
+            state.accessToken = null;
+        }
     },
     extraReducers:(builder)=>{
         // Register
@@ -67,5 +73,5 @@ const authSlice = createSlice({
 });
 
 
-export const {resetErrors} = authSlice.actions;
+export const {resetErrors, authLogout} = authSlice.actions;
 export default authSlice.reducer;
