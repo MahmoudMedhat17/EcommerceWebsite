@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import type { TProducts } from '@/types/Products';
 import AxioserrorHandler from '@/utils/AxioserrorHandler';
-
+import type { TProducts } from '@/types/Products';
 
 interface IWishlistProps{
     id:string;
@@ -17,6 +16,7 @@ const getWishlist = createAsyncThunk("wishlist/getWihslist",
         const { rejectWithValue, fulfillWithValue, signal} = thunkAPI;
 
 
+        // Need to separate the IDS of the products and the full products info to display them differently according to the user who is signed in.
         try {
 
             // Here we get the wishlist products the user with ID = 1 liked.

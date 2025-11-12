@@ -52,7 +52,7 @@ const authSlice = createSlice({
             if(isString(action.payload)){
                 state.error = action.payload;
             }
-        })
+        });
         // Login
         builder.addCase(getAuthLogin.pending,(state)=>{
             state.loading = "Pending";
@@ -68,7 +68,7 @@ const authSlice = createSlice({
             if(isString(action.payload)){
                 state.error = action.payload;
             }
-        })
+        });
     }
 });
 

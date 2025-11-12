@@ -9,14 +9,14 @@ import storage from 'redux-persist/lib/storage';
 
 
 // Here is the nomral config
-const rootPresistConfig = {
+const rootPersistConfig = {
     key:"root",
     storage,
-    whiteList:["cart","auth"]
+    whitelist:["cart","auth"]
 };
 
 // Here we target the items to be only cached from the cart and not all the cart "Items & productsInfo array".
-const cartPresistConfig = {
+const cartPersistConfig = {
     key:"cart",
     // Here we choose Web storage.
     storage,
@@ -24,16 +24,16 @@ const cartPresistConfig = {
     whitelist:["items"]
 };
 
-const wishlistPresistConfig = {
+const wishlistPersistConfig = {
     key:"wishlist",
     storage,
     whitelist:["itemsId"]
 };
 
-const authPresistConfig = {
+const authPersistConfig = {
     key:"auth",
     storage,
-    whiteList:["user", "accessToken"]
+    whitelist:["user", "accessToken"]
 };
 
 // Here we combine reducers to use them in configureStore.
@@ -41,12 +41,12 @@ const rootReducers = combineReducers({
     categories: categoriesSlice,
     products:productsSlice,
     // Here we apply persistReducer to cart as we want to cache the items inside the cart.
-    cart:persistReducer(cartPresistConfig, cartSlice),
-    wishlist:persistReducer(wishlistPresistConfig, wishlistSlice),
-    auth:persistReducer(authPresistConfig, authSlice)
+    cart:persistReducer(cartPersistConfig, cartSlice),
+    wishlist:persistReducer(wishlistPersistConfig, wishlistSlice),
+    auth:persistReducer(authPersistConfig, authSlice)
 });
 
-const presistedReducer = persistReducer(rootPresistConfig, rootReducers)
+const persistedReducer = persistReducer(rootPersistConfig, rootReducers)
 
 
-export default presistedReducer;
+export default persistedReducer;

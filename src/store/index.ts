@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, FLUSH, PAUSE, PERSIST, PURGE, REHYDRATE, REGISTER } from 'redux-persist';
-import presistedReducer from '@/store/rootReducers';
+import persistedReducer from '@/store/rootReducers';
 
 export const ReduxStore = configureStore({
-  reducer: presistedReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     // Here this middleware to disable objects from Redux Persist.
     getDefaultMiddleware({
@@ -14,9 +14,9 @@ export const ReduxStore = configureStore({
 });
 
 // Here we save the ReduxStore to persistStore to use it in main file.
-const presistor = persistStore(ReduxStore);
+const persistor = persistStore(ReduxStore);
 
-export { presistor };
+export { persistor };
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof ReduxStore.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

@@ -18,4 +18,3 @@ const ProtectedRoutes = () => {
 };
 
 export default ProtectedRoutes;
-// Need to make a small amount of time accessToken!!!

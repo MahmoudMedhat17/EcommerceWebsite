@@ -97,7 +97,28 @@
       "max": 2
     }
   ],
-  "wishlist": [],
+  "wishlist": [
+    {
+      "userId": 1,
+      "productId": "1",
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "productId": "4",
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "productId": "5",
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "productId": "17",
+      "id": 4
+    }
+  ],
   "users": [
     {
       "email": "AhmedAtef17@gmail.com",
@@ -105,6 +126,13 @@
       "firstName": "Ahmed",
       "lastName": "Atef",
       "id": 1
+    },
+    {
+      "email": "mahmoud@gmail.com",
+      "password": "$2a$10$SHnxIE/cap4Tth8uwGK/4ujxjK94QYYPaczBWBhi20eEA5yvCeG6.",
+      "firstName": "Mahmoud",
+      "lastName": "Medhat",
+      "id": 2
     }
   ]
 }
