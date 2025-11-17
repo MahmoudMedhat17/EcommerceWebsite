@@ -24,7 +24,7 @@ const Products = () => {
               // If not empty then show the Products by <Product/> component
               (productsFullInfo.map((product) => (
                 <div key={product.id}>
-                  <Product id={product.id} title={product.title} price={product.price} img={product.img} max={product.max} quantity={product.quantity} />
+                  <Product id={product.id} title={product.title} price={product.price} img={product.img} max={product.max} quantity={product.quantity} isAuthenticated={product.isAuthenticated } />
                 </div>
               )))
               :

@@ -46,7 +46,7 @@ export const cartSlice = createSlice({
             state.items[action.payload.id] = action.payload.quantity;
         },
         // This action is to remove an item from the cart.
-        removeItems:(state,action)=>{
+        removeItems:(state, action)=>{
             // Here we target the id of the product and set into a variable instead of writing everytime action.payload.id.
             const targetItem = action.payload.id;
             // delete is a JS operator that removes the property from the Object. so Here we want to remove the item from the cart by it's ID "targetItem".

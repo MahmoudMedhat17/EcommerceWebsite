@@ -4,6 +4,8 @@ import { useAppDispatch } from "@/store/hooks";
 import { useAppSelector } from "@/store/hooks";
 import { authLogout } from "@/store/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import getWishlist from "@/store/wishlist/thunk/getWishlist";
 
 const Header = () => {
 
@@ -16,6 +18,13 @@ const Header = () => {
     dispatch(authLogout());
     navigate("/");
   };
+
+  useEffect(()=>{
+    // Here when there's an accessToken then we dispatch the item Ids as a notification for the wishlist icon.
+    if(accessToken){
+      dispatch(getWishlist("productsIds"));
+    }
+  },[dispatch, accessToken]);
 
   return (
     <header className="pt-2">
@@ -56,7 +65,7 @@ const Header = () => {
                       {`${user?.firstName}`}
                     </Link>
 
-                    <div className="absolute w-fit bg-white text-black opacity-0 scale-y-0 group-hover:opacity-100 group-hover:scale-y-100 transition-all duration-300 ease-in-out origin-top">
+                    <div className="absolute w-fit z-99 bg-white text-black opacity-0 scale-y-0 group-hover:opacity-100 group-hover:scale-y-100 transition-all duration-300 ease-in-out origin-top">
                       <div className="p-3">
                         <Link to={"/profile"}>
                           <p className="font-medium cursor-pointer mb-3">

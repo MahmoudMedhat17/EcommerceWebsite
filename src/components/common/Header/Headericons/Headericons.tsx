@@ -1,4 +1,3 @@
-// import type { TProducts } from "@/types/Products";
 import { useNavigate } from "react-router-dom";
 
 

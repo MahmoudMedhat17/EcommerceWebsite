@@ -11,17 +11,20 @@ const useWishlist = () => {
   const dispatch = useAppDispatch();
 
   // Here we return all the product props "Title, price, images, etc.", product quantity from the cartItems state that contains the amount of the quantity of each product and liked as true only since all the products in the wishlist must be liked for sure. 
-  const productFullInfo = productDetails.map((product)=>(
+  const prdocuctDetails = productDetails.map((product)=>(
     {
       ...product,
       quantity:cartItems[product.id],
-      liked:true
+      // User can't get here in this wishlist page till he logs in so always the items here are liked => true and isAuthenticated to not show a modal msg that says to the user to log in since he is in this wishlist page and must be logged in so it's always true too. 
+      liked: true,
+      isAuthenticated:true
     }
   ));
 
 
   useEffect(()=>{
-    const promise = dispatch(getWishlist());
+    // Here this dispatch is to dispatch and dsplay the full info of the products inside the wishlist.
+    const promise = dispatch(getWishlist("productsDetails"));
     return () => promise.abort();
   },[dispatch]);
 
@@ -31,7 +34,7 @@ const useWishlist = () => {
   };
 
 
-   return {isLoading, loading, productFullInfo, handleToggleLike, error};
+   return {isLoading, loading, prdocuctDetails, handleToggleLike, error};
 };
 
 export default useWishlist;
