@@ -7,6 +7,7 @@ import { SpinnerCircular } from 'spinners-react';
 import { FcLike } from "react-icons/fc";
 import { FcLikePlaceholder } from "react-icons/fc";
 import Modals from "@/utils/Modals";
+import {ProductInfo} from "@/components/eCommerce/index";
 
 
 
@@ -51,14 +52,14 @@ const Product = memo(({ id, title, price, img, max, quantity, liked, isAuthentic
   const handleLikeToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
     // Here we make sure with this condition that if the user is Authenticated or not if yes then he can like the products, if not then a modal appears saying "you should log in first.".
     if (isAuthenticated) {
-     if (isLoading) {
-      return;
+      if (isLoading) {
+        return;
       };
       e.preventDefault();
       e.stopPropagation();
       setIsLoading(true);
       dispatch(getToggleLike(id))
-      console.log(id, "Working"); 
+      console.log(id, "Working");
     }
     // If the user is not Authenticated then show the Modal model.
     else {
@@ -69,35 +70,32 @@ const Product = memo(({ id, title, price, img, max, quantity, liked, isAuthentic
   return (
     <>
       {showModal && <Modals setShowModal={setShowModal} />}
-      <div className="space-y-2 w-fit relative">
-        <img src={img} className="h-36 mx-auto" />
-        <h2 className="font-semibold">{title}</h2>
-        <h3 className="font-medium">{price} EGP</h3>
-        <h4 className="font-normal text-xs">{isMaxReached ? "You reached the max amount of this product!" : `You can add more of this product ${productMaxReached}`}</h4>
-        <div className="flex items-center justify-center">
-          <button disabled={isBtnDisabled || isMaxReached} className="px-4 py-2 bg-blue-400 rounded-md hover:to-blue-700 duration-300 cursor-pointer text-lg font-semibold" onClick={handleAddToCart}>
-            {/* Here if the isBtnDisabled is true then the animation shows "Loading...", if it's not true then show "Add to cart" */}
-            {isBtnDisabled ? "Loading..." : "Add to cart"}
-          </button>
-        </div>
-        <button className='absolute top-1 right-0.5 sm:right-1' type='button' onClick={handleLikeToggle}>
-          {
-            isLoading ?
-              (
-                <SpinnerCircular size={20} thickness={100} speed={100} color="#2B7FFF" />
-              )
-              :
-              liked ?
+        <ProductInfo title={title} image={img} price={price} direction="column">
+          <h4 className="font-normal text-xs">{isMaxReached ? "You reached the max amount of this product!" : `You can add more of this product ${productMaxReached}`}</h4>
+          <div className="flex items-center justify-center mt-4">
+            <button disabled={isBtnDisabled || isMaxReached} className="w-full px-4 py-2 bg-blue-400 rounded-md hover:to-blue-700 duration-300 cursor-pointer text-lg font-semibold" onClick={handleAddToCart}>
+              {/* Here if the isBtnDisabled is true then the animation shows "Loading...", if it's not true then show "Add to cart" */}
+              {isBtnDisabled ? "Loading..." : "Add to cart"}
+            </button>
+          </div>
+          <button className='absolute top-1 right-0.5 sm:right-1' type='button' onClick={handleLikeToggle}>
+            {
+              isLoading ?
                 (
-                  <FcLike className="cursor-pointer" />
+                  <SpinnerCircular size={20} thickness={100} speed={100} color="#2B7FFF" />
                 )
                 :
-                (
-                  <FcLikePlaceholder className="cursor-pointer" />
-                )
-          }
-        </button>
-      </div>
+                liked ?
+                  (
+                    <FcLike className="cursor-pointer" />
+                  )
+                  :
+                  (
+                    <FcLikePlaceholder className="cursor-pointer" />
+                  )
+            }
+          </button>
+        </ProductInfo>
     </>
   )
 });
