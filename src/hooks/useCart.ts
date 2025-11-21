@@ -7,11 +7,11 @@ import { changeQuantityState, removeItems, clearCart, cleanCartSlice } from "@/s
 
 
 const useCart = () => {
-
-
+    
     const dispatch = useAppDispatch();
     const { items, loading, error, productDetails } = useAppSelector((state) => state.cart);
-    const wishlistItems = useAppSelector((state)=> state.wishlist.itemsId);
+    const wishlistItems = useAppSelector((state) => state.wishlist.itemsId);
+    const userAccessToken = useAppSelector((state) => state.auth.accessToken);
 
     useEffect(() => {
         const promise = dispatch(getCartItems());
@@ -59,7 +59,7 @@ const useCart = () => {
         dispatch(clearCart());
     };
 
-    return {loading, products, productDetails, error, changeQuantity, deleteItems, handleClearCart}
+    return { loading, products, productDetails, error, changeQuantity, deleteItems, handleClearCart, userAccessToken };
 }
 
 export default useCart
