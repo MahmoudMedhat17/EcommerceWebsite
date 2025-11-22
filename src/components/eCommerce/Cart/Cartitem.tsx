@@ -44,23 +44,6 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
 
     return (
         <ProductInfo title={title} image={img} price={price} direction='row'>
-            {/* <button className='absolute top-1 right-0.5 sm:right-1' type='button' onClick={handleLikeToggle}>
-                {
-                    isLoading ?
-                        (
-                            <SpinnerCircular size={20} thickness={100} speed={100} color="#2B7FFF" />
-                        )
-                        :
-                        liked ?
-                            (
-                                <FcLike className="cursor-pointer" />
-                            )
-                            :
-                            (
-                                <FcLikePlaceholder className="cursor-pointer" />
-                            )
-                }
-            </button> */}
             <div className="flex flex-col justify-between gap-2">
                 <div className='flex gap-2'>
                     <p>Quantity</p>

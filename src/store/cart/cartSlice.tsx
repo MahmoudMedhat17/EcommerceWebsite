@@ -1,14 +1,15 @@
 import { createSlice, createSelector } from '@reduxjs/toolkit';
-import { isString, type TProducts } from '@/types/index';
+import type { TProducts, TLoading } from '@/types/index';
 import type { RootState } from '@/store/index';
 import getCartItems from './thunk/getCartItems';
+import {isString} from '@/types/index';
 
 interface IcartSlice {
     // Here we make sure with index signature that items object recieves an id as a number only.
     items: { [key: string]: number };
     // Here productDetails includes all the props coming from TProducts.
     productDetails: TProducts[];
-    loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
+    loading: TLoading;
     error: string | null;
 };
 

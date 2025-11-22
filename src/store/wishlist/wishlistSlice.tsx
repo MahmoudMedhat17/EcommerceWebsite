@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getToggleLike from '@/store/wishlist/thunk/getToggleLike';
 import getWishlist from '@/store/wishlist/thunk/getWishlist';
-import {isString, type TProducts} from "@/types/index";
+import type { TProducts, TLoading} from "@/types/index";
 import { authLogout } from '@/store/auth/authSlice';
+import {isString} from '@/types/index';
 
 interface IinitialStateprops{
     itemsId:number[];
     productDetails: TProducts[];
-    loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
+    loading: TLoading;
     error: null | string;
 };
 

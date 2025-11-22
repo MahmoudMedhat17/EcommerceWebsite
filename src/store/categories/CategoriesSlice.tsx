@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import getCategories from '@/store/categories/thunk/getCategories';
-import { isString, type TCategories } from "@/types/index";
+import type { TCategories, TLoading } from "@/types/index";
+import {isString} from '@/types/index';
 
 // Here we define the data for records array is the data we get from the API, The Loading states with "Literal Types" and The error state with a string or null.
 interface ICategories {
     records: TCategories[],
-    loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
+    loading: TLoading;
     error: string | null;
 };
 

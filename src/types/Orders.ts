@@ -1,9 +1,7 @@
-import { type TProducts } from "@/types/index";
-
+import { type TProducts } from "@/types/Products";
 
 export type TOrders = {
-    id: number,
-    userId: number,
-    subTotal: number,
+    userId: number;
+    subTotal: number;
     items: TProducts[];
 };

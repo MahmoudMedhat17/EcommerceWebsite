@@ -1,19 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { type TOrders } from '@/types';
+import type { TOrders ,TLoading } from '@/types';
 import getOrders from '@/store/orders/thunk/getOrders';
 import {isString} from '@/types';
 
+
 interface IOrders{
+    loading: TLoading;
     orders: TOrders[];
-    loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
     error: string | null;
 };
 
 
 const initialState: IOrders = {
-    orders: [],
     loading: "Idle",
-    error:null
+    orders: [],
+    error: null
 };
 
 
@@ -35,9 +36,12 @@ const ordersSlice = createSlice({
             if (isString(action.payload)) {
                 state.error = action.payload;
             }
-        });
+        })
     }
 });
+
+
+
 
 
 export default ordersSlice.reducer;

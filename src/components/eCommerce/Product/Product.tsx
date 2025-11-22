@@ -6,7 +6,7 @@ import getToggleLike from "@/store/wishlist/thunk/getToggleLike";
 import { SpinnerCircular } from 'spinners-react';
 import { FcLike } from "react-icons/fc";
 import { FcLikePlaceholder } from "react-icons/fc";
-import Modals from "@/utils/Modals";
+import Modal from "@/utils/Modal";
 import {ProductInfo} from "@/components/eCommerce/index";
 
 
@@ -69,7 +69,7 @@ const Product = memo(({ id, title, price, img, max, quantity, liked, isAuthentic
 
   return (
     <>
-      {showModal && <Modals setShowModal={setShowModal} />}
+      {showModal && <Modal setShowModal={setShowModal} />}
         <ProductInfo title={title} image={img} price={price} direction="column">
           <h4 className="font-normal text-xs">{isMaxReached ? "You reached the max amount of this product!" : `You can add more of this product ${productMaxReached}`}</h4>
           <div className="flex items-center justify-center mt-4">

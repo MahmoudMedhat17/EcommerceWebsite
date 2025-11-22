@@ -2,9 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import getAuthRegister from '@/store/auth/thunk/getAuthRegister';
 import getAuthLogin from './thunk/getAuthLogin';
 import { isString } from '@/types';
+import type { TLoading } from '@/types';
 
 interface IAuthState{
-    loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
+    loading: TLoading;
     error: string | null;
     accessToken:string | null;
     user:{

@@ -17,6 +17,7 @@ const getOrders = createAsyncThunk("orders/getOrders", async (subTotal:number, t
         id: product.id,
         title: product.title,
         price: product.price,
+        image:product.img,
         // Here exlpanation for quantity => cart.items[product.id] means that the quantity is equal to the items inside the cart and the items object has and id and the quantity next to it for ex: id=1 :2 means that the product with id of 1 has two items of it quantity = 2 of that item, so this line means give me the quantity according to the id of each product the user ordered. so if it's product with id of 1 then the quantity of that product is 2!
         quantity: cart.items[product.id],
     }));
@@ -36,7 +37,6 @@ const getOrders = createAsyncThunk("orders/getOrders", async (subTotal:number, t
     } catch (error) {
         return rejectWithValue(AxioserrorHandler(error));
     }
-
 });
 
 

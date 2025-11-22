@@ -4,7 +4,7 @@ interface IModals{
 }
 
 
-const Modals = ({setShowModal}:IModals) => {
+const Modal = ({setShowModal}:IModals) => {
 
 
   // Here we get the setShowModal as props from Product component so we can control the open and close functionality of the Modal.
@@ -29,4 +29,4 @@ const Modals = ({setShowModal}:IModals) => {
   )
 }
 
-export default Modals;
+export default Modal;

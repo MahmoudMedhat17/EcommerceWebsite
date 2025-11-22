@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { isString, type TProducts } from "@/types/index";
+import type {  TProducts, TLoading } from "@/types/index";
 import getProducts from '@/store/products/thunk/getProducts';
+import {isString} from '@/types/index';
 
 
 interface IProducts {
     records: TProducts[],
-    loading: 'Idle' | 'Pending' | 'Succeeded' | 'Failed';
+    loading: TLoading;
     error: string | null;
 };
 
