@@ -29,7 +29,6 @@ const getOrders = createAsyncThunk("orders/getOrders", async (subTotal:number, t
         subTotal
     };
 
-
     try {
         const res = await axios.post("http://localhost:5000/orders", ordersPost);
         console.log(res.data);

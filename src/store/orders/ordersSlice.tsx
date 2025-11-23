@@ -21,7 +21,13 @@ const initialState: IOrders = {
 const ordersSlice = createSlice({
     name: "orders",
     initialState,
-    reducers: {},
+    reducers: {
+        // Here we want to reset the state of the UI of the order page to "Idle" state and null, so it shows there's no order yet, u need to create an order.
+        resetOrderPlacement: (state) => {
+            state.loading = "Idle";
+            state.error = null;
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getOrders.pending, (state) => {
             state.loading = "Pending";
@@ -36,12 +42,12 @@ const ordersSlice = createSlice({
             if (isString(action.payload)) {
                 state.error = action.payload;
             }
-        })
+        });
     }
 });
 
 
 
 
-
+export const {resetOrderPlacement } = ordersSlice.actions;
 export default ordersSlice.reducer;

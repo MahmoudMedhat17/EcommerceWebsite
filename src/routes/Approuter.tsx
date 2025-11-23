@@ -8,7 +8,7 @@ const Products = lazy(()=> import("@/pages/Products"));
 const Register = lazy(()=> import("@/pages/Register"));
 const Errorpage = lazy(()=> import("@/pages/Errorpage"));
 const Wishlist = lazy(()=> import("@/pages/Wishlist"));
-const Profile = lazy(()=>import("@/pages/Profile"));
+const Account = lazy(()=>import("@/pages/Account"));
 const Orders = lazy(()=>import("@/pages/Orders"));
 import { Cart } from "@/components/eCommerce";
 import { createBrowserRouter, RouterProvider } from "react-router";
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
                 },
                 {
                     path:"/profile",
-                    element:<Profile/>
+                    element:<Account/>
                 },
                 {
                     path:"orders",

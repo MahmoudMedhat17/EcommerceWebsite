@@ -3,13 +3,15 @@ import errorAnimation from "@/assets/lottieFiles/error.json";
 import emptyAnimation from "@/assets/lottieFiles/empty.json";
 import loadingAnimtaion from "@/assets/lottieFiles/loading.json";
 import notFoundAnimation from "@/assets/lottieFiles/notFound.json";
+import successAnimation from "@/assets/lottieFiles/success.json";
 
 
 const lottieAnimations = {
   errorAnimation,
   emptyAnimation,
   loadingAnimtaion,
-  notFoundAnimation
+  notFoundAnimation,
+  successAnimation
 };
 
 // Here we set lottieTypes with the names or keys of the lottieAnimations instead of writing them manually so this type becomes => "errorAnimation" | "emptyAnimation" | "loadingAnimtaion" | "notFoundAnimation"

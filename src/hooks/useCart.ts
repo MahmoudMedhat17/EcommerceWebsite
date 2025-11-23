@@ -2,8 +2,7 @@ import getCartItems from "@/store/cart/thunk/getCartItems";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { useEffect, useCallback } from "react";
 import { changeQuantityState, removeItems, clearCart, cleanCartSlice } from "@/store/cart/cartSlice";
-
-
+import { resetOrderPlacement } from "@/store/orders/ordersSlice";
 
 
 const useCart = () => {
@@ -12,6 +11,7 @@ const useCart = () => {
     const { items, loading, error, productDetails } = useAppSelector((state) => state.cart);
     const wishlistItems = useAppSelector((state) => state.wishlist.itemsId);
     const userAccessToken = useAppSelector((state) => state.auth.accessToken);
+    const { loading:orderLoading, error:orderError} = useAppSelector((state)=> state.orders);
 
     useEffect(() => {
         const promise = dispatch(getCartItems());
@@ -19,6 +19,8 @@ const useCart = () => {
         return ()=>{
             promise.abort();
             dispatch(cleanCartSlice());
+            // This dispatch is to clean the page of the orders so the it doesn't show the previous order of the user and show them an empty page of cart is empty so they can order a new order again.
+            dispatch(resetOrderPlacement());
         }
     }, [dispatch]);
 
@@ -59,7 +61,7 @@ const useCart = () => {
         dispatch(clearCart());
     };
 
-    return { loading, products, productDetails, error, changeQuantity, deleteItems, handleClearCart, userAccessToken };
+    return { loading, products, productDetails, error, changeQuantity, deleteItems, handleClearCart, userAccessToken, orderLoading, orderError };
 }
 
 export default useCart
