@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { TOrders ,TLoading } from '@/types';
-import getOrders from '@/store/orders/thunk/getOrders';
-import {isString} from '@/types';
+import type { TOrders, TLoading } from '@/types';
+import getOrders from '@/store/orders/thunk/getPlaceOrders';
+import { isString } from '@/types';
 
 
-interface IOrders{
+interface IOrders {
     loading: TLoading;
     orders: TOrders[];
     error: string | null;
@@ -49,5 +49,5 @@ const ordersSlice = createSlice({
 
 
 
-export const {resetOrderPlacement } = ordersSlice.actions;
+export const { resetOrderPlacement } = ordersSlice.actions;
 export default ordersSlice.reducer;

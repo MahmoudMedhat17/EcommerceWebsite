@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoutes = () => {
   
-    // Here we get the accessToken from the AuthSlice.
+  // Here we get the accessToken from the AuthSlice.
   const {accessToken} = useAppSelector((state)=> state.auth);
   
 

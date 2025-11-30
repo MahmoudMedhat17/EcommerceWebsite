@@ -1,9 +1,27 @@
-
-
+import { useAppSelector } from "@/store/hooks";
+import Headingcomponent from "@/components/eCommerce/HeadingComponent/Headingcomponent";
 
 const Account = () => {
+
+  // Here we get the user from the authSlice so we can use the user props to display his / her info.
+  const { user } = useAppSelector((state) => state.auth);
+
   return (
-    <div>Account</div>
+    <>
+      <Headingcomponent title="Account Info." />
+      <div className="flex flex-col gap-4">
+        {/* Here we display the user info using the user coming from the authslice. */}
+        <p>
+          FirstName: {user?.firstName}
+        </p>
+        <p>
+          LastName: {user?.lastName}
+        </p>
+        <p>
+          Email: {user?.email}
+        </p>
+      </div>
+    </>
   )
 }
 
