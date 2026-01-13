@@ -24,6 +24,12 @@ const Header = () => {
     setOpenMenu(!openMenu);
   };
 
+  // Here this function takes a path as an argument and then inside this function we call the navigate method from react router dom and path to it the path string so when the user clicks on categories for example then he get to categories page and the nav menu close automatically.
+  const handleMenuNav = (path: string) => {
+    setOpenMenu(false);
+    navigate(path);
+  };
+
   useEffect(() => {
     // Here when there's an accessToken then we dispatch the item Ids as a notification for the wishlist icon.
     if (accessToken) {
@@ -63,19 +69,19 @@ const Header = () => {
             {
               openMenu && (
                 <nav className={`md:hidden absolute left-0 top-14 bg-white w-full space-y-4 p-4 origin-top transform transition-all duration-300 ease-in-out scale-y-100 opacity-100 ${openMenu ? "scale-y-100 opacity-100" : "scale-y-0 opacity-0 h-0 overflow-hidden pointer-events-none"}`}>
-                  <Link to="/" className="block font-semibold text-lg">
+                  <Link onClick={() => handleMenuNav("/")} to="/" className="block font-semibold text-lg">
                     Home
                   </Link>
-                  <Link to="/categories" className="block font-semibold text-lg">
+                  <Link onClick={() => handleMenuNav("/categories")} to="/categories" className="block font-semibold text-lg">
                     Categories
                   </Link>
-                  <Link to="/aboutus" className="block font-semibold text-lg">
+                  <Link onClick={() => handleMenuNav("/aboutus")} to="/aboutus" className="block font-semibold text-lg">
                     About
                   </Link>
-                  <Link to="/profile" className="block font-semibold text-lg">
+                  <Link onClick={() => handleMenuNav("/profile")} to="/profile" className="block font-semibold text-lg">
                     Profile
                   </Link>
-                  <Link to="/profile/orders" className="block font-semibold text-lg">
+                  <Link onClick={() => handleMenuNav("/profile/orders")} to="/profile/orders" className="block font-semibold text-lg">
                     Orders
                   </Link>
                   {

@@ -36,9 +36,6 @@ const Login = () => {
       <form onSubmit={handleSubmit(submitForm)} className="flex justify-center items-center my-4">
         <div className="p-4 sm:p-8 shadow-xl w-full sm:w-1/2">
           <Forminput label="Email" placeHolder="Email" type="text" register={register} name="email" error={formErrors.email?.message}/>
-          {/* <p className="text-red-500">
-            {errors.Email?.message}
-          </p> */}
           <Forminput label="Password" placeHolder="Password" type="password" register={register} name="password" error={formErrors.password?.message}/>
           <button className="cursor-pointer bg-blue-500 text-white py-1 px-2.5 rounded-sm mt-3">
             {

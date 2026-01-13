@@ -23,7 +23,6 @@ const useRegister = () => {
     const navigate = useNavigate();
 
     const submitForm: SubmitHandler<SignUpData> = async (data) => {
-        console.log(data)
         const { firstName, lastName, email, password } = data;
         try {
             await dispatch(getAuthRegister({ firstName, lastName, email, password })).unwrap().then(() => navigate(`/login?message=${firstName} Successfully Registered`));

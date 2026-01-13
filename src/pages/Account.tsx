@@ -12,10 +12,10 @@ const Account = () => {
       <div className="flex flex-col gap-4">
         {/* Here we display the user info using the user coming from the authslice. */}
         <p>
-          FirstName: {user?.firstName}
+          First Name: {user?.firstName}
         </p>
         <p>
-          LastName: {user?.lastName}
+          Last Name: {user?.lastName}
         </p>
         <p>
           Email: {user?.email}

@@ -5,7 +5,7 @@ import type { RootState } from '@/store';
 
 
 
-const getPlaceOrders = createAsyncThunk("orders/getOrders", async (subTotal: number, thunkAPI) => {
+const getPlaceOrders = createAsyncThunk("orders/getPlaceOrders", async (subTotal: number, thunkAPI) => {
 
     const { rejectWithValue, getState } = thunkAPI;
 
@@ -21,6 +21,7 @@ const getPlaceOrders = createAsyncThunk("orders/getOrders", async (subTotal: num
         // Here exlpanation for quantity => cart.items[product.id] means that the quantity is equal to the items inside the cart and the items object has and id and the quantity next to it for ex: id=1 :2 means that the product with id of 1 has two items of it quantity = 2 of that item, so this line means give me the quantity according to the id of each product the user ordered. so if it's product with id of 1 then the quantity of that product is 2!
         quantity: cart.items[product.id],
     }));
+
 
     // Here is the object we pass to post METHOD that contains the order details such as the userId who ordered the order, items which is item detail itself such as title, img, price, etc. and the subTotal price of the whole order of the user.
     const ordersPost = {

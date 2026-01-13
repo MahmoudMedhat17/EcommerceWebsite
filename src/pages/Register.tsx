@@ -19,9 +19,6 @@ const Register = () => {
       <form  className="flex justify-center items-center my-4" onSubmit={handleSubmit(submitForm)}>
         <div className="p-4 sm:p-8 shadow-xl w-full sm:w-1/2">
           <Forminput label="FirstName" placeHolder="FirstName" type="text" register={register} name="firstName" error={formErrors.firstName?.message}/>
-          {/* <p className="text-red-500">
-            {errors.FirstName?.message}
-          </p> */}
           <Forminput label="LastName" placeHolder="LastName" type="text" register={register} name="lastName" error={formErrors.lastName?.message}/>
           <Forminput label="Email" placeHolder="Email" type="text" register={register} name="email" error={formErrors.email?.message} onBlur={handleEmailOnblur} checkEmail={checkEmailAvailability === "Checking" ? "Checking The Email Availability..." : checkEmailAvailability === "Failed" ? "Error Checking Email" : checkEmailAvailability === "Taken" ? "Email is already Taken !" : ""} success={checkEmailAvailability === "Available" ? "This Email is Available!" : ""}/>
           <Forminput label="Password" placeHolder="Password" type="password" register={register} name="password" error={formErrors.password?.message}/>

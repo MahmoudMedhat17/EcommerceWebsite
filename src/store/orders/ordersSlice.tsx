@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { TOrders, TLoading } from '@/types';
-import getOrders from '@/store/orders/thunk/getPlaceOrders';
+import getPlaceOrders from '@/store/orders/thunk/getPlaceOrders';
+import getOrders from '@/store/orders/thunk/getOrders';
 import { isString } from '@/types';
 
 
@@ -29,20 +30,37 @@ const ordersSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+        // Place Orders
+        builder.addCase(getPlaceOrders.pending, (state) => {
+            state.loading = "Pending";
+            state.error = null;
+        });
+        builder.addCase(getPlaceOrders.fulfilled, (state) => {
+            state.loading = "Succeeded";
+            state.error = null;
+        });
+        builder.addCase(getPlaceOrders.rejected, (state, action) => {
+            state.loading = "Failed";
+            if (isString(action.payload)) {
+                state.error = action.payload;
+            }
+        });
+
+        //Get orders
         builder.addCase(getOrders.pending, (state) => {
             state.loading = "Pending";
             state.error = null;
         });
-        builder.addCase(getOrders.fulfilled, (state) => {
+        builder.addCase(getOrders.fulfilled, (state, action) => {
             state.loading = "Succeeded";
-            state.error = null;
+            state.orders = action.payload;
         });
         builder.addCase(getOrders.rejected, (state, action) => {
             state.loading = "Failed";
             if (isString(action.payload)) {
                 state.error = action.payload;
             }
-        });
+        })
     }
 });
 
