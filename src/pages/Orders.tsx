@@ -1,26 +1,25 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import getOrders from "@/store/orders/thunk/getOrders";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import Headingcomponent from "@/components/eCommerce/HeadingComponent/Headingcomponent";
-
+import { LoadingComponent } from "@/components/feedback";
 
 const Orders = () => {
 
+  const { loading, error, userOrders } = useAppSelector((state) => state.orders);
 
   const dispatch = useAppDispatch();
 
-  const { loading, orders, error } = useAppSelector((state) => state.orders);
-
-
   useEffect(() => {
-    dispatch(getOrders())
+    const promise = dispatch(getOrders());
+
+    return () => promise.abort();
   }, [dispatch]);
 
   return (
     <>
       <Headingcomponent title="Orders" />
-
-      <div className="overflow-x-auto">
+      <LoadingComponent status={loading} error={error} loadingType="orders">
         <table className="min-w-full divide-y-2 divide-gray-200">
           <thead className="ltr:text-left rtl:text-right">
             <tr className="*:font-medium *:text-gray-900">
@@ -32,26 +31,19 @@ const Orders = () => {
 
           <tbody className="divide-y divide-gray-200">
             <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">Nandor the Relentless</td>
-              <td className="px-3 py-2 whitespace-nowrap">04/06/1262</td>
-              <td className="px-3 py-2 whitespace-nowrap">Vampire Warrior</td>
-            </tr>
-
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">Laszlo Cravensworth</td>
-              <td className="px-3 py-2 whitespace-nowrap">19/10/1678</td>
-              <td className="px-3 py-2 whitespace-nowrap">Vampire Gentleman</td>
-            </tr>
-
-            <tr className="*:text-gray-900 *:first:font-medium">
-              <td className="px-3 py-2 whitespace-nowrap">Nadja</td>
-              <td className="px-3 py-2 whitespace-nowrap">15/03/1593</td>
-              <td className="px-3 py-2 whitespace-nowrap">Vampire Seductress</td>
+              {
+                userOrders.map((order) => (
+                  <>
+                    <td className="px-3 py-2 whitespace-nowrap">{order.userId}</td>
+                    <td className="px-3 py-2 whitespace-nowrap">{order.items.length} item(s) {"/"} <span className="underline">Product Details</span></td>
+                    <td className="px-3 py-2 whitespace-nowrap">{order.subTotal}</td>
+                  </>
+                ))
+              }
             </tr>
           </tbody>
         </table>
-      </div>
-
+      </LoadingComponent>
     </>
   )
 }

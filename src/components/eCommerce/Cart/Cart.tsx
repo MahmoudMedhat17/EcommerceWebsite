@@ -7,7 +7,7 @@ import { LottieHandler } from "@/components/feedback";
 import { useAppDispatch } from "@/store/hooks";
 import OrdersModal from "@/utils/OrdersModal";
 import { useState } from "react";
-import getOrders from "@/store/orders/thunk/getPlaceOrders";
+import getPlaceOrders from "@/store/orders/thunk/getPlaceOrders";
 import { clearCart } from "@/store/cart/cartSlice";
 
 const Cart = () => {
@@ -24,7 +24,7 @@ const Cart = () => {
 
     // This function is to handle placing an order with getOrders syncThunk.
     const handlePlaceOrder = () => {
-        dispatch(getOrders(subTotal)).unwrap().then(() => {
+        dispatch(getPlaceOrders(subTotal)).unwrap().then(() => {
             // Here we dispatch clearCart to clear the cart after the user orders something.
             dispatch(clearCart());
             // Here we call handleModal function to close the Modal when the user confirm the order. So with this we close the Modal automatically.

@@ -1,59 +1,56 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { TOrders, TLoading } from '@/types';
-import getPlaceOrders from '@/store/orders/thunk/getPlaceOrders';
-import getOrders from '@/store/orders/thunk/getOrders';
-import { isString } from '@/types';
+import { createSlice } from "@reduxjs/toolkit";
+import { isString, type TLoading, type TOrders } from "@/types";
+import getPlaceOrder from "@/store/orders/thunk/getPlaceOrders";
+import getOrders from "@/store/orders/thunk/getOrders";
 
 
-interface IOrders {
-    loading: TLoading;
-    orders: TOrders[];
-    error: string | null;
+
+interface Iorder {
+    loading: TLoading,
+    userOrders: TOrders[],
+    error: string | null
 };
 
-
-const initialState: IOrders = {
+const initialState: Iorder = {
     loading: "Idle",
-    orders: [],
+    userOrders: [],
     error: null
 };
 
-
-const ordersSlice = createSlice({
-    name: "orders",
+const orderSlice = createSlice({
+    name: "order",
     initialState,
     reducers: {
-        // Here we want to reset the state of the UI of the order page to "Idle" state and null, so it shows there's no order yet, u need to create an order.
         resetOrderPlacement: (state) => {
             state.loading = "Idle";
             state.error = null;
         }
     },
     extraReducers: (builder) => {
-        // Place Orders
-        builder.addCase(getPlaceOrders.pending, (state) => {
+        // Place Order
+        builder.addCase(getPlaceOrder.pending, (state) => {
             state.loading = "Pending";
             state.error = null;
         });
-        builder.addCase(getPlaceOrders.fulfilled, (state) => {
+        builder.addCase(getPlaceOrder.fulfilled, (state) => {
             state.loading = "Succeeded";
             state.error = null;
         });
-        builder.addCase(getPlaceOrders.rejected, (state, action) => {
+        builder.addCase(getPlaceOrder.rejected, (state, action) => {
             state.loading = "Failed";
             if (isString(action.payload)) {
                 state.error = action.payload;
             }
-        });
+        })
 
-        //Get orders
+        // Get Orders
         builder.addCase(getOrders.pending, (state) => {
             state.loading = "Pending";
             state.error = null;
         });
         builder.addCase(getOrders.fulfilled, (state, action) => {
             state.loading = "Succeeded";
-            state.orders = action.payload;
+            state.userOrders = action.payload;
         });
         builder.addCase(getOrders.rejected, (state, action) => {
             state.loading = "Failed";
@@ -61,11 +58,8 @@ const ordersSlice = createSlice({
                 state.error = action.payload;
             }
         })
-    }
+    },
 });
 
-
-
-
-export const { resetOrderPlacement } = ordersSlice.actions;
-export default ordersSlice.reducer;
+export const { resetOrderPlacement } = orderSlice.actions;
+export default orderSlice.reducer;

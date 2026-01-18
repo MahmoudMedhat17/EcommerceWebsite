@@ -2,7 +2,7 @@ import { createSlice, createSelector } from '@reduxjs/toolkit';
 import type { TProducts, TLoading } from '@/types/index';
 import type { RootState } from '@/store/index';
 import getCartItems from './thunk/getCartItems';
-import {isString} from '@/types/index';
+import { isString } from '@/types/index';
 
 interface IcartSlice {
     // Here we make sure with index signature that items object recieves an id as a number only.
@@ -47,20 +47,20 @@ export const cartSlice = createSlice({
             state.items[action.payload.id] = action.payload.quantity;
         },
         // This action is to remove an item from the cart.
-        removeItems:(state, action)=>{
+        removeItems: (state, action) => {
             // Here we target the id of the product and set into a variable instead of writing everytime action.payload.id.
             const targetItem = action.payload.id;
             // delete is a JS operator that removes the property from the Object. so Here we want to remove the item from the cart by it's ID "targetItem".
             delete state.items[targetItem];
             // Here we use filter method around productDetails array to remove the matched id of the chosen product to be deletd from the array.
-            state.productDetails =  state.productDetails.filter((item)=> item.id !== targetItem);
+            state.productDetails = state.productDetails.filter((item) => item.id !== targetItem);
         },
         // Here we set the items object and productDetails array to an empty array again so when user clicks on Clear Cart button all the products are removed from the array and the array becomes empty and so is the Cart.
-        clearCart:(state)=>{
+        clearCart: (state) => {
             state.items = {};
             state.productDetails = [];
         },
-        cleanCartSlice:(state)=>{
+        cleanCartSlice: (state) => {
             state.productDetails = [];
         }
     },
