@@ -21,6 +21,7 @@ const orderSlice = createSlice({
     name: "order",
     initialState,
     reducers: {
+        // Here we want to reset the state of the UI of the order page to "Idle" state and null, so it shows there's no order yet, u need to create an order.
         resetOrderPlacement: (state) => {
             state.loading = "Idle";
             state.error = null;

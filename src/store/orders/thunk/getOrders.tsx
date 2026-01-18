@@ -6,12 +6,12 @@ import type { RootState } from "@/store";
 
 
 const getOrders = createAsyncThunk("/orders/getOrders", async (_, thunkAPI) => {
-    const { rejectWithValue, getState } = thunkAPI;
+    const { rejectWithValue, getState, signal } = thunkAPI;
 
     const { auth } = getState() as RootState;
 
     try {
-        const res = await axios.get(`http://localhost:5000/orders?userId=${auth.user?.id}`);
+        const res = await axios.get(`http://localhost:5000/orders?userId=${auth.user?.id}`, { signal });
         console.log(res.data);
         return res.data;
     } catch (error) {
