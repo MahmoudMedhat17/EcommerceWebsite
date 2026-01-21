@@ -42,7 +42,7 @@ const orderSlice = createSlice({
             if (isString(action.payload)) {
                 state.error = action.payload;
             }
-        })
+        });
 
         // Get Orders
         builder.addCase(getOrders.pending, (state) => {
@@ -58,7 +58,7 @@ const orderSlice = createSlice({
             if (isString(action.payload)) {
                 state.error = action.payload;
             }
-        })
+        });
     },
 });
 

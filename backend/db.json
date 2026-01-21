@@ -185,28 +185,28 @@
           "id": 1,
           "title": "Jersey top",
           "price": 249,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSWa_-imPyxcGxYkrCAs6v8ftnq90zu1CKKg&s",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSWa_-imPyxcGxYkrCAs6v8ftnq90zu1CKKg&s",
           "quantity": 1
         },
         {
           "id": 2,
           "title": "Regular Fit Jersey top",
           "price": 229,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnPZcObuYfd5bJCIrnuI5bFowFQBUxNAtGMA&s",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnPZcObuYfd5bJCIrnuI5bFowFQBUxNAtGMA&s",
           "quantity": 1
         },
         {
           "id": 5,
           "title": "Sweatshirt shorts",
           "price": 300,
-          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwvfFGXlhs_3eArIV9KSE5KfWloTCN8Ycihw&s",
+          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwvfFGXlhs_3eArIV9KSE5KfWloTCN8Ycihw&s",
           "quantity": 1
         },
         {
           "id": 17,
           "title": "Regular Fit football shirt",
           "price": 449,
-          "image": "https://tiimg.tistatic.com/fp/1/007/909/nylon-half-sleeve-regular-fit-and-double-shaded-printed-round-collar-football-jersey-069.jpg",
+          "img": "https://tiimg.tistatic.com/fp/1/007/909/nylon-half-sleeve-regular-fit-and-double-shaded-printed-round-collar-football-jersey-069.jpg",
           "quantity": 1
         }
       ],
