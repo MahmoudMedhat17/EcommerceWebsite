@@ -2,7 +2,7 @@ interface IProductInfo {
   title: string | undefined;
   image: string | undefined;
   price: number | undefined;
-  quantity: number | undefined;
+  quantity?: number | undefined;
   direction: "row" | "column";
   children?: React.ReactNode;
 };
