@@ -1,51 +1,51 @@
-import categoriesSlice from "@/store/categories/categoriesSlice";
-import productsSlice from "@/store/products/productsSlice";
+import categoriesSlice from "@/store/categories/CategoriesSlice";
+import productsSlice from "@/store/products/ProductsSlice";
 import cartSlice from '@/store/cart/cartSlice';
 import wishlistSlice from "@/store/wishlist/wishlistSlice";
 import authSlice from "@/store/auth/authSlice";
 import ordersSlice from "@/store/orders/ordersSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; 
+import storage from 'redux-persist/lib/storage';
 
 
 // Here is the nomral config
 const rootPersistConfig = {
-    key:"root",
+    key: "root",
     storage,
-    whitelist:["cart","auth"]
+    whitelist: ["cart", "auth"]
 };
 
 // Here we target the items to be only cached from the cart and not all the cart "Items & productsInfo array".
 const cartPersistConfig = {
-    key:"cart",
+    key: "cart",
     // Here we choose Web storage.
     storage,
     // Here we choose to cache items only from the cart.
-    whitelist:["items"]
+    whitelist: ["items"]
 };
 
 const wishlistPersistConfig = {
-    key:"wishlist",
+    key: "wishlist",
     storage,
-    whitelist:["itemsId"]
+    whitelist: ["itemsId"]
 };
 
 const authPersistConfig = {
-    key:"auth",
+    key: "auth",
     storage,
-    whitelist:["user", "accessToken"]
+    whitelist: ["user", "accessToken"]
 };
 
 // Here we combine reducers to use them in configureStore.
 const rootReducers = combineReducers({
     categories: categoriesSlice,
     products: productsSlice,
-    orders:ordersSlice,
+    orders: ordersSlice,
     // Here we apply persistReducer to cart as we want to cache the items inside the cart.
-    cart:persistReducer(cartPersistConfig, cartSlice),
-    wishlist:persistReducer(wishlistPersistConfig, wishlistSlice),
-    auth:persistReducer(authPersistConfig, authSlice)
+    cart: persistReducer(cartPersistConfig, cartSlice),
+    wishlist: persistReducer(wishlistPersistConfig, wishlistSlice),
+    auth: persistReducer(authPersistConfig, authSlice)
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducers)
