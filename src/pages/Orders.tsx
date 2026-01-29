@@ -11,7 +11,7 @@ const Orders = () => {
   return (
     <>
       <Headingcomponent title="Orders" />
-      
+
       {
         // Here if showModal is set to true then show the Modal, if it's false then close the Modal.
         showModal &&
@@ -39,18 +39,16 @@ const Orders = () => {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200">
-            <tr className="*:text-gray-900 *:first:font-medium">
-              {
-                userOrders.map((order) => (
-                  <>
-                    <td className="px-3 py-2 whitespace-nowrap">{order.userId}</td>
-                    <td className="px-3 py-2 whitespace-nowrap">{order.items.length} item(s) {"/"} <span onClick={() => handleOrderDetails(order.userId)} className="underline cursor-pointer">Product Details</span></td>
-                    <td className="px-3 py-2 whitespace-nowrap">{order.subTotal}</td>
-                  </>
-                ))
-              }
-            </tr>
+          <tbody className="divide-y divide-gray-200 ">
+            {
+              userOrders.map((order) => (
+                <tr className="*:text-gray-900 *:first:font-medium">
+                  <td className="px-3 py-2 whitespace-nowrap">{order.userId}</td>
+                  <td className="px-3 py-2 whitespace-nowrap">{order.items.length} item(s) {"/"} <span onClick={() => handleOrderDetails(order.userId)} className="underline cursor-pointer">Product Details</span></td>
+                  <td className="px-3 py-2 whitespace-nowrap">{order.subTotal} EGP</td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </LoadingComponent>
