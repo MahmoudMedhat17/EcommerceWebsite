@@ -1,5 +1,5 @@
-import categoriesSlice from "@/store/categories/CategoriesSlice";
-import productsSlice from "@/store/products/ProductsSlice";
+import categoriesSlice from "@/store/categories/categoriesSlice";
+import productsSlice from "@/store/products/productsSlice";
 import cartSlice from '@/store/cart/cartSlice';
 import wishlistSlice from "@/store/wishlist/wishlistSlice";
 import authSlice from "@/store/auth/authSlice";

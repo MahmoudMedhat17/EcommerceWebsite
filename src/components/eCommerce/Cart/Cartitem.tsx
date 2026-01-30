@@ -29,7 +29,10 @@ const Cartitem = memo(({ id, title, price, img, quantity, max, changeQuantity, d
     // This function that is used to onChange the <select></select> by the function passed as props from the Cart.
     const handleChangeQuantity = (e: React.ChangeEvent<HTMLSelectElement>) => {
         // Here we make sure that the value that the user selects is in number.
-        const quantity = Number(e.target.value);
+
+        // const value = e.currentTarget as HTMLSelectElement;
+
+        const quantity = Number((e.target as HTMLSelectElement).value);
 
         // Here is the function coming from the Cart that takes the id and the quantity of the item in the Cart.
         changeQuantity(id, quantity);
