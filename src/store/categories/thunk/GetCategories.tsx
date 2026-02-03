@@ -19,7 +19,7 @@ const getCategories = createAsyncThunk(
         const { rejectWithValue, signal } = thunkAPI;
 
         try {
-            const response = await axios.get("http://localhost:5000/categories", {signal:signal});
+            const response = await axios.get("https://e-commerce-json-server-kappa.vercel.app/categories", { signal: signal });
             return response.data;
         } catch (error) {
             // Here we check if the error comes from Axios itself then show the rejectWithValue msg with the response msg or the msg of the error itself

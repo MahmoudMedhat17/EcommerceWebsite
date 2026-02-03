@@ -33,7 +33,7 @@ const getPlaceOrder = createAsyncThunk("/orders/placeOrder",
         };
 
         try {
-            const res = await axios.post("http://localhost:5000/orders", orderPostData);
+            const res = await axios.post("https://e-commerce-json-server-kappa.vercel.app/orders", orderPostData);
             console.log(res.data);
 
             return res.data;

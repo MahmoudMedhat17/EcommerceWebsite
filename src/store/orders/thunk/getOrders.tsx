@@ -11,7 +11,7 @@ const getOrders = createAsyncThunk("/orders/getOrders", async (_, thunkAPI) => {
     const { auth } = getState() as RootState;
 
     try {
-        const res = await axios.get(`http://localhost:5000/orders?userId=${auth.user?.id}`, { signal });
+        const res = await axios.get(`https://e-commerce-json-server-kappa.vercel.app/orders?userId=${auth.user?.id}`, { signal });
         console.log(res.data);
         return res.data;
     } catch (error) {

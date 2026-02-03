@@ -4,17 +4,17 @@ import AxioserrorHandler from "@/utils/AxioserrorHandler";
 
 
 const getProducts = createAsyncThunk("/products/getProducts",
-    async (prefix:string,thunkApi) =>{
+    async (prefix: string, thunkApi) => {
         // Here signal is for Http request cancellation.
-        const {rejectWithValue, signal} = thunkApi;
+        const { rejectWithValue, signal } = thunkApi;
         try {
-            const response = await axios.get(`http://localhost:5000/products?cat_prefix=${prefix}`,{
-                signal:signal
+            const response = await axios.get(`https://e-commerce-json-server-kappa.vercel.app/products?cat_prefix=${prefix}`, {
+                signal: signal
             });
             return response.data;
         } catch (error) {
             // Here we check if the error comes from Axios itself then show the rejectWithValue msg with the response msg or the msg of the error itself
-           return rejectWithValue(AxioserrorHandler(error));
+            return rejectWithValue(AxioserrorHandler(error));
         }
     }
 );

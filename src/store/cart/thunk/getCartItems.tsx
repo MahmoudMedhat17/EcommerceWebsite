@@ -26,7 +26,7 @@ const getCartItems = createAsyncThunk(
         // Here with Try & Catch we call the API data using axios and handle the errors.
         try {
             // Get the data of /products with the modified ids we created above => productIds.
-            const res = await axios.get(`/products?${productIds}`,{signal:signal});
+            const res = await axios.get(`https://e-commerce-json-server-kappa.vercel.app/products?${productIds}`, { signal: signal });
 
             // Here we assign data variable with data coming from the API. 
             let data = res.data;

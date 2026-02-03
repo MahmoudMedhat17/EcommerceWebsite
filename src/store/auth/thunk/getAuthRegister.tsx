@@ -4,21 +4,21 @@ import axios from "axios";
 
 
 interface IFormData {
-    firstName:string;
-    lastName:string;
-    email:string;
-    password:string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
 };
 
 
 
-const getAuthRegister = createAsyncThunk("auth/getAuthRegister", async (formData: IFormData,thunkAPI)=>{
+const getAuthRegister = createAsyncThunk("auth/getAuthRegister", async (formData: IFormData, thunkAPI) => {
 
-    const {rejectWithValue} = thunkAPI;
+    const { rejectWithValue } = thunkAPI;
 
 
     try {
-        const res = await axios.post("http://localhost:5000/register",formData);
+        const res = await axios.post("https://e-commerce-json-server-kappa.vercel.app/register", formData);
         console.log(res.data);
         return res.data;
     } catch (error) {
