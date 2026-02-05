@@ -6,12 +6,13 @@ import { authLogout } from "@/store/auth/authSlice";
 import MainHeadericons from "@/components/common/Header/MainHeadericons/MainHeadericons";
 import getWishlist from "@/store/wishlist/thunk/getWishlist";
 import BurgerMenu from "@/assets/svg/burgerMenu.svg?react";
+import { type RootState } from "@/store";
 
 const Header = () => {
 
   const [openMenu, setOpenMenu] = useState(false);
   const dispatch = useAppDispatch();
-  const { user, accessToken } = useAppSelector((state) => state.auth);
+  const { user, accessToken } = useAppSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
 
   const handleLogout = () => {
